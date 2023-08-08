@@ -1,7 +1,9 @@
 .btLogin {
-    border: 'none';
-    background-color: 'black';
+    background-color: black;
+    border: none;
+    color: white;
     border-radius: 15;
     height: 40px;
     width: 200px;
+    border-radius: 15px;
 }
