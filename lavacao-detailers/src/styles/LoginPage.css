@@ -1,5 +1,5 @@
 .containerPage {
-    background-color: orange;
+    background-color: rgb(255, 255, 255);
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -8,8 +8,12 @@
 }
 
 .containerLogin {
-    background-color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.btLogin {
+    margin-top: 2rem;
 }

@@ -1,7 +1,15 @@
+import "./styles/UserLoginStyle.css";
+
 function UserLogin() {
     return (
         <div>
-            UserLogin
+              <input 
+                type="text"
+                id="idLogin"
+                name="idLogin"
+                placeholder="Usuário"
+                className="inputLogin" 
+                ></input>
         </div>
     );
 }
