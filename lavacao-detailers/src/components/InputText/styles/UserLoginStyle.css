@@ -1,18 +1,19 @@
-.inputLogin{
+.inputLogin {
     background-color: transparent;
     position: relative;
     border: none;
     border-bottom: 1.5px solid gray;
     transition: border-bottom-width ease-in-out;
     font-size: 14px;
-    margin-top: 15px;
     padding-bottom: 10px;
     width: 100%;
     margin-right: 2rem;
+    box-sizing: border-box; /* Adicione esta linha */
 }
 
-.inputLogin:focus{
+.inputLogin:focus {
     border: none;
     outline: none;
-    border-bottom: 2.5px solid gray;
+    border-bottom: 1.5px solid gray; /* Mantenha a mesma largura da borda */
+    box-shadow: 0 2px 0 gray; /* Adicione um sombreamento para dar a sensação de elevação */
 }
