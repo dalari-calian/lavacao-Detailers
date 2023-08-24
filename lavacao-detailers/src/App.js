@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './screens/LoginPage';
+import { LoginPage } from './screens/LoginPage';
 
 function App() {
   return (

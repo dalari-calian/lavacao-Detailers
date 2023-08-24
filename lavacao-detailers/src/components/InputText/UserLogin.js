@@ -1,17 +1,15 @@
-import "./styles/UserLoginStyle.css";
+import styles from "./UserLogin.module.css";
 
-function UserLogin() {
+export function UserLogin() {
     return (
         <div>
-              <input 
+            <p>Login</p>
+            <input 
                 type="text"
                 id="idLogin"
                 name="idLogin"
-                placeholder="Usuário"
-                className="inputLogin" 
-                ></input>
+                className={ styles.inputLogin } 
+            ></input>
         </div>
     );
 }
-  
-export default UserLogin;

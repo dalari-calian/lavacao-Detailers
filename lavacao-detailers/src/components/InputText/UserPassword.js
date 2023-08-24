@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "./styles/UserPassStyle.css";
+import styles from "./UserPassword.module.css";
 
-function UserPassword() {
+export function UserPassword() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
@@ -14,21 +14,18 @@ function UserPassword() {
     };
 
     return (
-        <div className='containerInputSenha'>
+        <div className={ styles.containerInputSenha }>
             <input
                 type={showPassword ? 'text' : 'password'}
                 id="idPassword"
                 name="idPassword"
-                placeholder="Senha"
                 value={password}
                 onChange={handlePasswordChange}
-                className="inputSenha"
+                className={ styles.inputSenha }
             />
-            <button className="btMostrarSenha" onClick={toggleShowPassword}>
+            <button className={ styles.btMostrarSenha } onClick={toggleShowPassword}>
                 {showPassword ? "Esconder Senha" : "Mostrar Senha"}
             </button>
         </div>
     );
 }
-
-export default UserPassword;
