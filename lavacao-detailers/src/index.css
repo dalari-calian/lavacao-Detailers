@@ -1,5 +1,16 @@
+:root {
+  --white: #ffffff;
+  --black: #000000;
+
+  --gray-200: #b5b5b5;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+} 
+
+input, button, textarea, label, p {
+  font-family: 'Roboto', sans-serif;
 }

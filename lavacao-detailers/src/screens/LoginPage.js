@@ -6,11 +6,17 @@ import { UserPassword } from "../components/InputText/UserPassword";
 export function LoginPage() {
   return (
     <div className={ styles.containerPage }>
-        <div className={ styles.containerLogin }>
-            <UserLogin className={ styles.inputLogin }/>
-            <UserPassword className={ styles.inputSenha }/>
-            <BtLogin className={ styles.btLogin }/>
-        </div>
+      <div className={ styles.containerLogin }>
+          <UserLogin 
+            className={ styles.inputLogin }
+            name="idLogin"
+          />
+          <UserPassword 
+            className={ styles.inputSenha }
+            name="idPassword"
+          />
+          <BtLogin className={ styles.btLogin }/>
+      </div>
     </div>
   );
 }
