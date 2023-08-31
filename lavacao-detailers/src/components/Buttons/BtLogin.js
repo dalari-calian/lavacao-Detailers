@@ -1,16 +1,15 @@
 import styles from "./styles/BtStyles.module.css";
 
-function BtLogin() {
+export function BtLogin( { onClick }) {
     return (
         <div>
             <button
             className={styles.btLogin}
+            onClick={onClick}
             >
                 ENTRAR
             </button>
         </div>
     );
 }
-  
-export default BtLogin;
   
