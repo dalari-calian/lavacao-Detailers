@@ -24,6 +24,8 @@ export function UserPassword() {
                 value={password}
                 onChange={handlePasswordChange}
                 className={styles.inputSenha}
+                placeholder='Senha'
+                maxLength={19}
             />
             <button className={styles.btMostrarSenha} onClick={toggleShowPassword}>
                 {showPassword ? <HideIcon /> : <ShowIcon />}

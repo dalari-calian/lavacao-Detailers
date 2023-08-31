@@ -1,17 +1,19 @@
 .containerPage {
-    background-color: rgb(255, 255, 255);
     height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .containerLogin {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
+    height: 6.5rem;
+    margin-bottom: 2rem;
 }
 
 .btLogin {

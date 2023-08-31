@@ -2,21 +2,17 @@
     background-color: transparent;
     position: relative;
     border: none;
-    border-bottom: 1.5px solid gray;
+    /*border-bottom: 1.5px solid gray;*/
     transition: border-bottom-width ease-in-out;
     font-size: 14px;
-    padding-bottom: 10px;
     width: 100%;
-    margin-right: 2rem;
-    box-sizing: border-box; /* Adicione esta linha */
-    margin-bottom: 1rem;
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 
 .inputLogin:focus {
     border: none;
     outline: none;
-    border-bottom: 1.5px solid gray; /* Mantenha a mesma largura da borda */
-    box-shadow: 0 2px 0 gray; /* Adicione um sombreamento para dar a sensação de elevação */
 }
 
 .focusInput {
@@ -29,4 +25,16 @@
     pointer-events: none;
     color: #adadad;
     font-family: Nunito, sans-serif;
-  }
+}
+
+.containerInputLogin{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--gray-200);
+    border-radius: 4px;
+    height: 2.5rem;
+    width: 12rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}

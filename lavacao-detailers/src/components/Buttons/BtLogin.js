@@ -1,12 +1,12 @@
-import "./styles/BtStyles.css";
+import styles from "./styles/BtStyles.module.css";
 
 function BtLogin() {
     return (
         <div>
             <button
-            className="btLogin"
+            className={styles.btLogin}
             >
-                LOGIN
+                ENTRAR
             </button>
         </div>
     );

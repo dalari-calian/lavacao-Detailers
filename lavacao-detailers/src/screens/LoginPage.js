@@ -15,8 +15,8 @@ export function LoginPage() {
             className={ styles.inputSenha }
             name="idPassword"
           />
+        </div>
           <BtLogin className={ styles.btLogin }/>
-      </div>
     </div>
   );
 }
