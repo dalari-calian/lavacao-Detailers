@@ -6,6 +6,7 @@ export function BtLogin( { onClick }) {
             <button
             className={styles.btLogin}
             onClick={onClick}
+            type="submit"
             >
                 ENTRAR
             </button>

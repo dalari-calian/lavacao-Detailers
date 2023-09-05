@@ -1,6 +1,8 @@
 const { app, BrowserWindow} = require('electron');
 const path = require('path');
 
+const idDev = require('electron-is-dev')
+
 function createWindow() {
     const win = new BrowserWindow({
         height: 600,
@@ -9,7 +11,9 @@ function createWindow() {
             preload: path.join(__dirname, "preloader.js")
         },
         autoHideMenuBar: true,
+        icon: path.join(__dirname, "detailer-logo-1.png")
     })
+    
     //win.loadFile("index.html");
     win.loadURL("http://localhost:3000")
 }

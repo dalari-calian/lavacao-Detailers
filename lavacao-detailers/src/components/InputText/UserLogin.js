@@ -9,7 +9,7 @@ export function UserLogin({ value, onChange }) {
                 name="idLogin"
                 className={ styles.inputLogin }
                 placeholder="Login"
-                maxLength={17}
+                maxLength={20}
                 value={value}
                 onChange={onChange}
             ></input>

@@ -2,11 +2,18 @@
   "name": "lavacao-detailers",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "name": "Calia Dalari",
+    "email": "cdalari@gmail.com"
+  },
+  "description": "Aplicativo para Controle de Serviços",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "electron-is-dev": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
@@ -17,13 +24,38 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron": "electron .",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "build": {
+    "extraMetadata": {
+      "main": "public/electron.js"
+    },
+    "appId": "com.exemplo.calian",
+    "productName": "Lavação Detailers",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "win": {
+      "icon": "public/detailer-logo-256.png"
+    }
   },
   "browserslist": {
     "production": [
@@ -39,6 +71,7 @@
   },
   "devDependencies": {
     "electron": "^25.4.0",
-    "web-vitals": "^3.4.0"
+    "web-vitals": "^3.4.0",
+    "electron-builder": "24.6.3"
   }
 }

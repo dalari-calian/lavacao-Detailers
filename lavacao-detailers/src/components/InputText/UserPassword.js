@@ -20,9 +20,13 @@ export function UserPassword({ value, onChange }) {
                 onChange={onChange}
                 className={styles.inputSenha}
                 placeholder='Senha'
-                maxLength={18}
+                maxLength={20}
             />
-            <button className={styles.btMostrarSenha} onClick={toggleShowPassword}>
+            <button 
+            className={styles.btMostrarSenha} 
+            onClick={toggleShowPassword}
+            type="button"
+            >
                 {showPassword ? <HideIcon /> : <ShowIcon />}
             </button>
         </div>

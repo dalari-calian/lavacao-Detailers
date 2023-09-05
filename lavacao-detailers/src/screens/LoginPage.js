@@ -3,6 +3,7 @@ import { BtLogin } from "../components/Buttons/BtLogin";
 import { UserLogin } from "../components/InputText/UserLogin";
 import { UserPassword } from "../components/InputText/UserPassword";
 import { useState } from "react";
+import LogoDetailer from "../assets/icon/detailer-logo-1-removebg-preview.png"
 
 export function LoginPage() {
   const [login, setLogin] = useState("");
@@ -25,25 +26,34 @@ export function LoginPage() {
   };
   
   return (
-    <div className={ styles.containerPage }>
-      <div className={ styles.containerLogin }>
-          <UserLogin 
-            className={ styles.inputLogin }
-            name="idLogin"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
+    <form className={ styles.containerPage }>
+      <div className={ styles.containerBg }>
+        <div className={ styles.containerImg}>
+          <img 
+            src={ LogoDetailer }
+            alt="Logo Detailer"
+            className={ styles.logoDetailer}
           />
-          <UserPassword 
-            className={ styles.inputSenha }
-            name="idPassword"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        </div>
+        <div className={ styles.containerLogin }>
+            <UserLogin 
+              className={ styles.inputLogin }
+              name="idLogin"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+            />
+            <UserPassword 
+              className={ styles.inputSenha }
+              name="idPassword"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
         </div>
         <BtLogin 
           className={ styles.btLogin }
           onClick={(e) => handleLoginClick(e)}
         />
-    </div>
+      </div>
+    </form>
   );
 }
