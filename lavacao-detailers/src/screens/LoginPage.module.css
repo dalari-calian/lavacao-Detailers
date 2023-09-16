@@ -36,6 +36,11 @@
     padding-bottom: 4rem;
 }
 
+.containerErro {
+    padding-top: 1.5rem;
+    height: 2rem;
+}
+
 .logoDetailer {
     height: 20rem;
 }

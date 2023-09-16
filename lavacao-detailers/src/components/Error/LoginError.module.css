@@ -1,0 +1,44 @@
+.containerErro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #512121;
+    height: 4rem;
+    padding: 1rem;
+    border-radius: 12px;
+    flex-direction: row;
+    border: 3px solid var(--erro-100);
+    transition: background-color 0.5s ease;
+}
+
+.containerErro:hover {
+   background-color: #802323;
+}
+
+p {
+    color: rgba(255, 0, 0, 0.837);
+}
+
+.containerBt {
+    display: flex;
+    justify-content: end;
+    width: 19rem;
+}
+
+.btClose {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+}
+
+
+.btClose:hover {
+    cursor: pointer;
+}
+
+.button {
+    color: rgba(255, 0, 0, 0.837);
+}

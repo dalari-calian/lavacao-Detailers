@@ -4,24 +4,27 @@ import { UserLogin } from "../components/InputText/UserLogin";
 import { UserPassword } from "../components/InputText/UserPassword";
 import { useState } from "react";
 import LogoDetailer from "../assets/icon/detailer-logo-1-removebg-preview.png"
+import { LoginError } from "../components/Error/LoginError";
 
 export function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLoginClick = () => {
+  const handleLoginClick = (e) => {
     // Validação de login e senha
 
     console.log("Login: "+ login)
     console.log("Senha: "+ password)
 
-    if (login === "seu_usuario" && password === "sua_senha") {
+    if (login === "calian" && password === "123") {
       // Lógica de autenticação bem-sucedida
       setError(""); // Limpa qualquer erro anterior
       // Redirecione ou execute a ação desejada aqui
     } else {
-      setError("Login ou senha inválidos"); // Define uma mensagem de erro
+      e.preventDefault();
+
+      setError("Login ou Senha Inválido!"); // Define uma mensagem de erro
     }
   };
   
@@ -53,6 +56,9 @@ export function LoginPage() {
           className={ styles.btLogin }
           onClick={(e) => handleLoginClick(e)}
         />
+        <div className={ styles.containerErro }>
+          {error && <LoginError error={error} onClick={(e) => setError("")}/>}
+        </div>
       </div>
     </form>
   );
