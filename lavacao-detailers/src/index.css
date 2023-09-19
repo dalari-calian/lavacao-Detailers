@@ -2,7 +2,8 @@
 :root {
   --white: #ffffff;
   --black: #000000;
-
+ 
+  --gray-100: #eeeeee;
   --gray-200: #b5b5b5;
   --gray-500: #424242;
 

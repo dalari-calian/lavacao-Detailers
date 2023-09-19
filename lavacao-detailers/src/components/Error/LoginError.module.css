@@ -8,7 +8,17 @@
     border-radius: 12px;
     flex-direction: row;
     border: 3px solid var(--erro-100);
-    transition: background-color 0.5s ease;
+    opacity: 0;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+}
+
+.containerErro.hide {
+    opacity: 0;
+    pointer-events: none; /* Para desabilitar cliques no componente durante o fade-out */
+  }
+
+.containerErro.show{
+    opacity: 1;
 }
 
 .containerErro:hover {
