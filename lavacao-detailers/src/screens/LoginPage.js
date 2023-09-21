@@ -5,11 +5,14 @@
   import { useState } from "react";
   import LogoDetailer from "../assets/icon/detailer-logo-1-removebg-preview.png"
   import { LoginError } from "../components/Error/LoginError";
+  import { useNavigate } from 'react-router-dom';
 
   export function LoginPage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     const handleLoginClick = (e) => {
       // Validação de login e senha
@@ -21,6 +24,7 @@
         // Lógica de autenticação bem-sucedida
         setError(""); // Limpa qualquer erro anterior
         // Redirecione ou execute a ação desejada aqui
+        navigate('/homepage');
       } else {
         e.preventDefault();
 
