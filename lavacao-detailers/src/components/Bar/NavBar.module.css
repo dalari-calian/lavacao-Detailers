@@ -1,0 +1,5 @@
+.containerNav {
+    background-color: var(--gray-300);
+    display: flex;
+    flex-grow: 1;
+}

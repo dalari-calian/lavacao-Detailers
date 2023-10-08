@@ -1,0 +1,21 @@
+.containerPage {
+    display: flex;
+    background-color: var(--white);
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+.containerNav {
+    display: flex;
+    height: 6rem;
+}
+
+.containerSide {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 8rem;
+    border-right: 2px solid var(--gray-300);
+}

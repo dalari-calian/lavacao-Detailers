@@ -23,7 +23,7 @@ export function LoginError({ error, onClick }) {
     <div
       className={`${styles.containerErro} ${isVisible ? styles.show : styles.hide}`}
     >
-      <p>{error}</p>
+      <p className={styles.erro}>{error}</p>
       <button className={styles.btClose} onClick={handleButtonClick}>
         <Close className={styles.button} />
       </button>

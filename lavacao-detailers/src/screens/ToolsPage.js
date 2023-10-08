@@ -2,7 +2,7 @@ import styles from "./HomePage.module.css";
 import { NavBar } from "../components/Bar/NavBar";
 import { SideBar } from "../components/Bar/SideBar";
 
-export function HomePage() {
+export function ToolsPage() {
   
   return (
     <div className={ styles.containerPage }>

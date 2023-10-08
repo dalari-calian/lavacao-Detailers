@@ -1,8 +1,8 @@
-import styles from "./HomePage.module.css";
+import styles from "./ClientPage.module.css";
 import { NavBar } from "../components/Bar/NavBar";
 import { SideBar } from "../components/Bar/SideBar";
 
-export function HomePage() {
+export function ClientPage() {
   
   return (
     <div className={ styles.containerPage }>
