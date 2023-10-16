@@ -1,4 +1,4 @@
-import styles from "./styles/BtStyles.module.css";
+import styles from "./BtStyles.module.css";
 
 export function BtLogin( { onClick }) {
     return (

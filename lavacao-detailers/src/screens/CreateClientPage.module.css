@@ -1,0 +1,23 @@
+.containerPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+    height: 100vh;
+    width: 100vw;
+}
+
+.containerForm {
+    display: flex;
+    background-color: var(--gray-300);
+    height: 40rem;
+    width: 50rem;
+    border-radius: 25px;
+    align-items: center;
+}
+
+.containerName {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}

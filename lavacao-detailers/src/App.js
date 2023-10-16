@@ -5,6 +5,7 @@ import { HomePage } from './screens/HomePage';
 import { ClientPage } from './screens/ClientPage'
 import { CarPage } from './screens/CarPage'
 import { ToolsPage } from './screens/ToolsPage'
+import { CreateClientPage } from './screens/CreateClientPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/clientpage" element={<ClientPage />} />
         <Route path="/carpage" element={<CarPage />} />
         <Route path="/toolspage" element={<ToolsPage />} />
+        <Route path="/createclient" element={<CreateClientPage />} />
       </Routes>
     </BrowserRouter>
   );

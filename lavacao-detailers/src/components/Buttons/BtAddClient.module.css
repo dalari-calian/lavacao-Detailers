@@ -1,0 +1,16 @@
+.btAddClient {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffb623;
+    height: 3rem;
+    padding: 0px 15px;
+    border-radius: 10px;
+    transition: background-color 0.5s, transform 0.5s ease-out;
+}
+
+.btAddClient:hover {
+    cursor: pointer;
+    background-color: #ffaa00;
+    transform: scale(1.04);
+}
