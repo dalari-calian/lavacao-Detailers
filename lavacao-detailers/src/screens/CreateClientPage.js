@@ -7,13 +7,14 @@ export function CreateClientPage() {
             <form className={ styles.containerForm }>
                 <div className={ styles.containerName}>
                     <ClientName 
-                        placeholder="Nome"
                         id="idName"
+                        detail="Nome"
                     />
                     <ClientName 
-                        placeholder="Sobrenome"
                         id="idLastName"
+                        detail="Sobrenome"
                     />
+
                 </div>
             </form>
         </div>

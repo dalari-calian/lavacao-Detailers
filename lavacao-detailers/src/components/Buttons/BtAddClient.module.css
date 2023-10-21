@@ -14,3 +14,7 @@
     background-color: #ffaa00;
     transform: scale(1.04);
 }
+
+.btAddClient:active {
+    transform: scale(0.95);
+}
