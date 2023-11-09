@@ -16,8 +16,11 @@
     align-items: center;
 }
 
-.containerName {
+.containerInput {
     display: flex;
+    flex-direction: column;
+    padding: 0 12rem;
     flex-grow: 1;
+    flex-wrap: wrap;
     justify-content: center;
 }

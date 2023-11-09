@@ -11,9 +11,16 @@
     font-size: 1.1rem;
     outline: none;
     transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+    padding: 0 12px;
+    margin-bottom: 25px;
 }
 
 .inputClientName:focus{
+    background-color: #f3a20049;
+    border: 1.5px solid #f3a200c6;
+}
+
+.inputClientName:hover{
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }

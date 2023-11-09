@@ -1,0 +1,19 @@
+.btCreate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffb623;
+    height: 3rem;
+    border-radius: 10px;
+    transition: background-color 0.5s, transform 0.2s ease-out;
+}
+
+.btCreate:hover {
+    cursor: pointer;
+    background-color: #ffaa00;
+    transform: scale(1.04);
+}
+
+.btCreate:active {
+    transform: scale(0.95);
+}

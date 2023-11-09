@@ -1,7 +1,7 @@
 import styles from "./ClientPage.module.css";
 import { NavBar } from "../components/Bar/NavBar";
 import { SideBar } from "../components/Bar/SideBar";
-import { BtAddClient } from "../components/Buttons/BtAddClient";
+import { BtAdd } from "../components/Buttons/BtAdd";
 import { useNavigate } from "react-router-dom";
 
 export function ClientPage() {
@@ -19,7 +19,8 @@ export function ClientPage() {
         </div>
         <div className={styles.containerGrid}>
           <div className={styles.buttonContainer}>
-            <BtAddClient
+            <BtAdd
+              labelBtAdd="Adicionar Cliente"
               onClick={() => navigate("/createclient")}
             />
           </div>

@@ -1,4 +1,4 @@
-.btAddClient {
+.btAdd {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,12 +9,12 @@
     transition: background-color 0.5s, transform 0.5s ease-out;
 }
 
-.btAddClient:hover {
+.btAdd:hover {
     cursor: pointer;
     background-color: #ffaa00;
     transform: scale(1.04);
 }
 
-.btAddClient:active {
+.btAdd:active {
     transform: scale(0.95);
 }

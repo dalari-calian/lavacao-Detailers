@@ -6,6 +6,7 @@
   import LogoDetailer from "../assets/icon/detailer-logo-1-removebg-preview.png"
   import { LoginError } from "../components/Error/LoginError";
   import { useNavigate } from 'react-router-dom';
+  import axios from "axios";
 
   export function LoginPage() {
     const [login, setLogin] = useState("");
@@ -15,12 +16,30 @@
     const navigate = useNavigate();
 
     const handleLoginClick = async (e) => {
-      // Validação de login e senha
       e.preventDefault();
 
-      console.log(login)
-      console.log(password)
-
+      try {
+        const response = await axios.post("http://localhost:3333/login/validate", {
+          login,
+          password,
+        });
+      
+        if (response.status === 200) {
+          setError("");
+          navigate('/homepage');
+        } else {
+          setError("Login ou Senha Inválido!");
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          setError("Login ou Senha Inválido!");
+        } else {
+          setError("Erro durante o login. Tente novamente mais tarde.");
+        }
+      }
+      
+      
+      /*
       try {
         const response = await fetch("http://localhost:3333/login/validate", {
           method: "POST",
@@ -45,17 +64,6 @@
       } catch (error) {
         console.error("Error during login:", error);
         setError("Erro durante o login. Tente novamente mais tarde.");
-      }
-      /*
-      if (login === "calian" && password === "123") {
-        // Lógica de autenticação bem-sucedida
-        setError(""); // Limpa qualquer erro anterior
-        // Redirecione ou execute a ação desejada aqui
-        navigate('/homepage');
-      } else {
-        e.preventDefault();
-
-        setError("Login ou Senha Inválido!"); // Define uma mensagem de erro
       }
       */
     };
