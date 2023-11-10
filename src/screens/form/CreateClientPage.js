@@ -1,7 +1,7 @@
 import styles from "./CreateClientPage.module.css"
-import { ClientInput } from "../components/InputText/ClientInput";
-import { BtCreate } from "../components/Buttons/BtCreate";
-import { SuccessMessage } from "../components/popup/SuccessMessage";
+import { ClientInput } from "../../components/InputText/ClientInput";
+import { BtCreate } from "../../components/Buttons/BtCreate";
+import { SuccessMessage } from "../../components/Popup/SuccessMessage";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';

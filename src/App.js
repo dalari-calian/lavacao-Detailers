@@ -5,7 +5,7 @@ import { HomePage } from './screens/HomePage';
 import { ClientPage } from './screens/ClientPage'
 import { CarPage } from './screens/CarPage'
 import { ToolsPage } from './screens/ToolsPage'
-import { CreateClientPage } from './screens/CreateClientPage';
+import { CreateClientPage } from './screens/form/CreateClientPage';
 
 function App() {
   return (
