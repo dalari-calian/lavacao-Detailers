@@ -58,12 +58,11 @@ export function CreateClientPage() {
                 setSuccessMessage("Cliente criado com sucesso!");
                 setSuccess(true)
 
-                
                 setTimeout(() => {
                     setSuccessMessage(null);
                     setSuccess(false)
                     navigate('/clientpage');
-                }, 2500);
+                }, 3000);
                 
             } else {
                 setSuccessMessage(null);
