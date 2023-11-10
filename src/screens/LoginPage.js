@@ -34,7 +34,7 @@
         if (error.response && error.response.status === 401) {
           setError("Login ou Senha Inválido!");
         } else {
-          setError("Erro durante o login. Tente novamente mais tarde.");
+          setError("Erro durante o login. Tente novamente!");
         }
       }
       

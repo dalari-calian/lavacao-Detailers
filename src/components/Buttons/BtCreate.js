@@ -1,9 +1,9 @@
 import styles from './BtCreate.module.css'
 
-export function BtCreate({ onClick, label }) {
+export function BtCreate({ onClick, label, disable }) {
     return (
         <div 
-            className={styles.btCreate}
+            className={`${styles.btCreate} ${disable ? styles.disabled : ''}`}
             onClick={onClick}
         >
             <p>{label}</p>

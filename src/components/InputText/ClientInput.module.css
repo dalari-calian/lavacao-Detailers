@@ -1,4 +1,4 @@
-.inputClientName{
+.inputClientName {
     display: flex;
     background-color: var(--gray-100);
     border: 1.5px solid transparent;
@@ -10,17 +10,38 @@
     border-radius: 10px;
     font-size: 1.1rem;
     outline: none;
-    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, opacity 0.5s ease; /* Adicionado 'opacity' à transição */
     padding: 0 12px;
     margin-bottom: 25px;
+    opacity: 1; /* Definido para 1 por padrão para garantir que seja visível inicialmente */
 }
 
-.inputClientName:focus{
+.inputClientName:focus {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }
 
-.inputClientName:hover{
+.inputClientName:hover {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.error {
+    border: 1.5px solid #ff0000;
+}
+
+.error .inputClientName {
+    opacity: 0.8; /* Defina a opacidade desejada para o estado de erro */
+}
+
+.alertIcon {
+    position: absolute;
+    top: 48%;
+    right: 12px;
+    transform: translateY(-50%);
+    color: #ff0000;
 }
