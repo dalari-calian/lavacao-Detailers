@@ -43,8 +43,8 @@ export function ClientPage() {
               labelBtAdd="Adicionar Cliente"
               onClick={() => navigate("/createclient")}
             />
-            <ClientGrid items={clientData} />
           </div>
+          <ClientGrid items={clientData} />
         </div>
       </div>
     </div>

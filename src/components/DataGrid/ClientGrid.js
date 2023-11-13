@@ -1,18 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './ClientGrid.module.css';
+import { DataGrid } from '@mui/x-data-grid';
 
 export function ClientGrid({ items }) {
+  const columns = [
+    { 
+      field: 'firstName',
+      headerName: 'Nome',
+      width: 250,
+      headerClassName: style.headerCell
+    },
+    { 
+      field: 'lastName',
+      headerName: 'Sobrenome',
+      width: 250
+    },
+    { 
+      field: 'cpf',
+      headerName: 'CPF',
+      width: 220
+    },
+    { 
+      field: 'email',
+      headerName: 'Email',
+      width: 300
+    },
+    { 
+      field: 'phone',
+      headerName: 'Celular',
+      width: 250 
+    },
+  ];
+
+  const rows = items.map((client) => ({
+    id: client.id,
+    firstName: client.firstName,
+    lastName: client.lastName,
+    cpf: client.cpf,
+    email: client.email,
+    phone: client.phone,
+  }));
+  
+  const localizedTexts = {
+    // Substitua o texto padrão "Rows per page:" por sua tradução desejada
+    pagination: {
+      rowsPerPage: 'Linhas por página:',
+    },
+    // Adicione mais traduções conforme necessário
+  };
+  
   return (
     <div className={style.gridContainer}>
-      {items.map((client, index) => (
-        <div key={index} className={style.gridItem}>
-          <p>Nome: {client.firstName} {client.lastName}</p>
-          <p>CPF: {client.cpf}</p>
-          <p>Email: {client.email}</p>
-          <p>Telefone: {client.phone}</p>
-        </div>
-      ))}
+      <div style={{ height: 550, width: '85vw' }}>
+        <DataGrid
+          className={style.gridStyle}
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5, 10, 20]}
+          pagination
+          localeText={localizedTexts}
+        />
+      </div>
     </div>
   );
 }

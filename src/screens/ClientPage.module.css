@@ -32,8 +32,6 @@
 }
 
 .containerGrid {
-    display: flex;
     flex-grow: 1;
-    background-color: rgba(0, 255, 255, 0.348);
     margin: 6rem 4rem;
 }

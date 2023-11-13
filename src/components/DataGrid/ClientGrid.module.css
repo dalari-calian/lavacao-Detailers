@@ -6,8 +6,20 @@
 }
   
 .gridItem {
-background-color: #ececec;
-padding: 16px;
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ececec;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gridStyle {
+    border-radius: 20px;
+    display: flex;
+}
+
+.customHeaderClass {
+    background-color: #ff0000; /* Substitua pela cor desejada */
+    text-align: center; /* Ajuste conforme necessário */
+    padding: 8px; /* Ajuste conforme necessário */
+    font-weight: bold; /* Ajuste conforme necessário */
 }
