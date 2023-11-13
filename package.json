@@ -15,6 +15,7 @@
     "@formatjs/intl": "^2.9.6",
     "@mui/material": "^5.14.17",
     "@mui/styled-engine-sc": "^6.0.0-alpha.5",
+    "@mui/styles": "^5.14.17",
     "@mui/system": "^5.14.17",
     "@mui/x-data-grid": "^6.18.1",
     "@testing-library/jest-dom": "^5.17.0",
