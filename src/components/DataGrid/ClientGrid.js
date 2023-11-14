@@ -8,28 +8,32 @@ export function ClientGrid({ items }) {
     { 
       field: 'firstName',
       headerName: 'Nome',
-      width: 250,
-      headerClassName: style.headerCell
+      width: 300,
+      align: 'center',
     },
     { 
       field: 'lastName',
       headerName: 'Sobrenome',
-      width: 250
+      width: 300,
+      align: 'center',
     },
     { 
       field: 'cpf',
       headerName: 'CPF',
-      width: 220
+      width: 280,
+      align: 'center',
     },
     { 
       field: 'email',
       headerName: 'Email',
-      width: 300
+      width: 350,
+      align: 'center',
     },
     { 
       field: 'phone',
       headerName: 'Celular',
-      width: 250 
+      width: 280,
+      align: 'center',
     },
   ];
 
@@ -43,16 +47,17 @@ export function ClientGrid({ items }) {
   }));
   
   const localizedTexts = {
-    // Substitua o texto padrão "Rows per page:" por sua tradução desejada
-    pagination: {
-      rowsPerPage: 'Linhas por página:',
-    },
-    // Adicione mais traduções conforme necessário
+    
+    toolbarFilters: 'Filtros',
+    toolbarFiltersLabel: 'Mostrar filtros',
+    toolbarFiltersTooltipHide: 'Esconder filtros',
+    toolbarFiltersTooltipShow: 'Mostrar filtros',
+    
   };
   
   return (
     <div className={style.gridContainer}>
-      <div style={{ height: 550, width: '85vw' }}>
+      <div style={{ height: 650, width: '85vw' }}>
         <DataGrid
           className={style.gridStyle}
           rows={rows}
@@ -61,6 +66,15 @@ export function ClientGrid({ items }) {
           rowsPerPageOptions={[5, 10, 20]}
           pagination
           localeText={localizedTexts}
+          disableRowSelectionOnClick={true}
+          sx={{
+            '.MuiDataGrid-columnSeparator': {
+              display: 'none',
+            },
+            '&.MuiDataGrid-root': {
+              border: 'none',
+            },
+          }}
         />
       </div>
     </div>

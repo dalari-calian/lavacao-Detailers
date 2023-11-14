@@ -12,14 +12,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.gridStyle {
-    border-radius: 20px;
-    display: flex;
+.headerStyle{
+    background-color: #000000;
 }
 
-.customHeaderClass {
-    background-color: #ff0000; /* Substitua pela cor desejada */
-    text-align: center; /* Ajuste conforme necessário */
-    padding: 8px; /* Ajuste conforme necessário */
-    font-weight: bold; /* Ajuste conforme necessário */
+.gridStyle {
+    border-radius: 20px;
+    background-color: #F4F4F4;
+    box-shadow: 4px 4px 40px 2px #00000040;
 }
+
