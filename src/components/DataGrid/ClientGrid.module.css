@@ -4,21 +4,4 @@
     gap: 16px;
     padding: 16px;
 }
-  
-.gridItem {
-    background-color: #ececec;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.headerStyle{
-    background-color: #000000;
-}
-
-.gridStyle {
-    border-radius: 20px;
-    background-color: #F4F4F4;
-    box-shadow: 4px 4px 40px 2px #00000040;
-}
 
