@@ -66,17 +66,17 @@ export function ClientGrid({ items }) {
             '.MuiDataGrid-columnSeparator': {
               display: 'none',
             },
-            '& .MuiDataGrid-columnHeaders': {
+            '.MuiDataGrid-columnHeaders': {
               backgroundColor: "#C8C8C8",
               borderRadius: "20px 20px 0px 0px",
-              paddingLeft: "1rem"
+              paddingLeft: "1rem",
             },
             '.MuiDataGrid-row': {
               paddingLeft: "1rem"
             },
-            '.MuiDataGrid-selectedRowCount': {
-              backgroundColor: "red"
-            }
+            '.MuiDataGrid-cell:focus': {
+              outline: 0,
+            },
           }}
         />
       </div>
