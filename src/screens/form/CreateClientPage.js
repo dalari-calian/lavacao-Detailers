@@ -1,5 +1,5 @@
 import styles from "./CreateClientPage.module.css"
-import { ClientInput } from "../../components/InputText/ClientInput";
+import { FormInput } from "../../components/InputText/FormInput";
 import { BtCreate } from "../../components/Buttons/BtCreate";
 import { SuccessMessage } from "../../components/Popup/SuccessMessage";
 import axios from "axios";
@@ -91,7 +91,7 @@ export function CreateClientPage() {
         <div className={ styles.containerPage }>
             <form className={ styles.containerForm }>
                 <div className={ styles.containerInput}>
-                    <ClientInput 
+                    <FormInput 
                         id="idName"
                         detail="Nome"
                         maxLength={15}
@@ -101,7 +101,7 @@ export function CreateClientPage() {
                         showError={firstNameError}
                         disable={success}
                     />
-                    <ClientInput 
+                    <FormInput 
                         id="idLastName"
                         detail="Sobrenome"
                         maxLength={15}
@@ -111,7 +111,7 @@ export function CreateClientPage() {
                         showError={lastNameError}
                         disable={success}
                     />
-                    <ClientInput 
+                    <FormInput 
                         id="idCpf"
                         detail="Cpf"
                         placeholder="Digite o CPF"
@@ -121,7 +121,7 @@ export function CreateClientPage() {
                         showError={cpfError}
                         disable={success}
                     />
-                    <ClientInput 
+                    <FormInput 
                         id="idEmail"
                         detail="Email"
                         placeholder="Digite o email"
@@ -131,7 +131,7 @@ export function CreateClientPage() {
                         showError={emailError}
                         disable={success}
                     />
-                    <ClientInput 
+                    <FormInput 
                         id="idPhone"
                         detail="Celular"
                         placeholder="Digite o número de celular"

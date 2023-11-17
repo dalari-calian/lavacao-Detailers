@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './ClientGrid.module.css';
+import style from './CarGrid.module.css';
 import { DataGrid, ptBR } from '@mui/x-data-grid';
 
-export function ClientGrid({ items }) {
+export function CarGrid({ items }) {
   const columns = [
     { 
       field: 'firstName',
@@ -36,14 +36,14 @@ export function ClientGrid({ items }) {
       headerClassName: style.headerStyle,
     },
   ];
-
-  const rows = items.map((client) => ({
-    id: client.id,
-    firstName: client.firstName,
-    lastName: client.lastName,
-    cpf: client.cpf,
-    email: client.email,
-    phone: client.phone,
+  
+  const rows = items.map((car) => ({
+    id: car.id,
+    firstName: car.firstName,
+    lastName: car.lastName,
+    cpf: car.cpf,
+    email: car.email,
+    phone: car.phone,
   }));
   
   return (
@@ -84,7 +84,7 @@ export function ClientGrid({ items }) {
   );
 }
 
-ClientGrid.propTypes = {
+CarGrid.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

@@ -1,4 +1,4 @@
-.inputClientName {
+.inputFormName {
     display: flex;
     background-color: var(--gray-100);
     border: 1.5px solid transparent;
@@ -16,12 +16,12 @@
     opacity: 1; /* Definido para 1 por padrão para garantir que seja visível inicialmente */
 }
 
-.inputClientName:focus {
+.inputFormName:focus {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }
 
-.inputClientName:hover {
+.inputFormName:hover {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }
@@ -34,7 +34,7 @@
     border: 1.5px solid #ff0000;
 }
 
-.error .inputClientName {
+.error .inputFormName {
     opacity: 0.8; /* Defina a opacidade desejada para o estado de erro */
 }
 

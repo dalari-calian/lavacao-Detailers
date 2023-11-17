@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
-import styles from "./ClientInput.module.css";
+import styles from "./FormInput.module.css";
 import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 
-export function ClientInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable }) {
+export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable }) {
 
     const [mask,setMask] = useState("")
 
@@ -26,7 +26,7 @@ export function ClientInput({ id, detail, placeholder, maxLength, value, onChang
                 mask={mask}
                 maskChar={null}
                 maxLength={maxLength}
-                className={`${styles.inputClientName} ${showError ? styles.error : ''}`}
+                className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
