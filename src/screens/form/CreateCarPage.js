@@ -76,7 +76,9 @@ export function CreateCarPage() {
         }
     }
 
-    const handleInputChange = (value, setValue, setError) => {
+    const handleInputChange = (id, value, setValue, setError) => {
+        value = id === "idLicensePlate" ? value.toUpperCase() : value;
+        
         setValue(value);
 
         setError(false);
@@ -84,11 +86,7 @@ export function CreateCarPage() {
 
     const handleSwitchChange = (event) => {
         setIsMercosul(event.target.checked);
-        if (event.target.checked) {
-            console.log("Ativado")
-        } else {
-            console.log("Desativado")
-        }
+        setLicensePlate("")
     };
     
     useEffect(() => {
@@ -108,7 +106,7 @@ export function CreateCarPage() {
                         maxLength={15}
                         placeholder="Digite o Modelo do Carro"
                         value={modelName}
-                        onChange={(e) => handleInputChange(e.target.value, setModelName, setModelNameError)}
+                        onChange={(e) => handleInputChange("idModel", e.target.value, setModelName, setModelNameError)}
                         showError={modelNameError}
                         disable={success}
                     />
@@ -118,7 +116,7 @@ export function CreateCarPage() {
                         maxLength={15}
                         placeholder="Digite a Marca do Carro"
                         value={carBrand}
-                        onChange={(e) => handleInputChange(e.target.value, setCarBrand, setCarBrandError)}
+                        onChange={(e) => handleInputChange("idCarBrand", e.target.value, setCarBrand, setCarBrandError)}
                         showError={carBrandError}
                         disable={success}
                     />
@@ -128,11 +126,12 @@ export function CreateCarPage() {
                                 id="idLicensePlate"
                                 detail="Placa"
                                 placeholder="Digite a Placa do Carro"
-                                maxLength={14}
+                                maxLength={7}
                                 value={licensePlate}
-                                onChange={(e) => handleInputChange(e.target.value, setLicensePlate, setLicensePlateError)}
+                                onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
                                 showError={licensePlateError}
                                 disable={success}
+                                plateFormat={isMercosul}
                             />
                         </div>
                         <div className={styles.switchContainer}>
@@ -149,7 +148,7 @@ export function CreateCarPage() {
                         placeholder="Digite a Cor do Carro"
                         maxLength={25}
                         value={carColor}
-                        onChange={(e) => handleInputChange(e.target.value, setCarColor, setCarColorError)}
+                        onChange={(e) => handleInputChange("idCarColor", e.target.value, setCarColor, setCarColorError)}
                         showError={carColorError}
                         disable={success}
                     />
@@ -159,7 +158,7 @@ export function CreateCarPage() {
                         placeholder="Digite o Proprietário do Carro"
                         maxLength={13}
                         value={carOwner}
-                        onChange={(e) => handleInputChange(e.target.value, setCarOwner, setCarOwnerError)}
+                        onChange={(e) => handleInputChange("idCarOwner", e.target.value, setCarOwner, setCarOwnerError)}
                         showError={carOwnerError}
                         disable={success}
                     />

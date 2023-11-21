@@ -7,12 +7,13 @@ export function SwitchIOS({ checked, onChange }) {
       checked={checked}
       onChange={onChange}
       sx={(theme) => ({
-        width: 40,
+        width: 42,
         height: 26,
         padding: 0,
+        marginTop: 1,
         '& .MuiSwitch-switchBase': {
             padding: 0,
-            margin: 0.2,
+            margin: 0.25,
             transitionDuration: '300ms',
             '&.Mui-checked': {
             transform: 'translateX(16px)',

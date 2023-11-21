@@ -3,7 +3,7 @@ import InputMask from 'react-input-mask';
 import styles from "./FormInput.module.css";
 import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 
-export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable }) {
+export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat }) {
 
     const [mask,setMask] = useState("")
 
@@ -12,6 +12,10 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
             setMask("999.999.999-99");
         } else if (id === "idPhone") {
             setMask("99 99999-9999");
+        } else if (id === "idLicensePlate" && plateFormat === false) {
+            setMask("AAA-9999");
+        } else if (id === "idLicensePlate" && plateFormat === true) {
+            setMask("AAA9A99");
         } else {
             setMask("");
         }
@@ -26,6 +30,10 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
                 mask={mask}
                 maskChar={null}
                 maxLength={maxLength}
+                formatChars={{
+                    'A': '[A-Za-z]',
+                    '9': '[0-9]',
+                }}
                 className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
                 placeholder={placeholder}
                 value={value}
