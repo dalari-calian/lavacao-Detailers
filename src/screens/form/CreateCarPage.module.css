@@ -56,10 +56,11 @@
 }
 
 .licensePlateInput {
-    flex-grow: 1;
+    flex-grow: 10;
 }
 
 .switchContainer {
+    flex-grow: 1;
     margin-left: 1.5rem;
     margin-bottom: 2.2rem;
 }

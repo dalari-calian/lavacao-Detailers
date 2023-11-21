@@ -2,6 +2,7 @@ import styles from "./CreateCarPage.module.css"
 import { FormInput } from "../../components/InputText/FormInput";
 import { BtCreate } from "../../components/Buttons/BtCreate";
 import { SuccessMessage } from "../../components/Popup/SuccessMessage";
+import { ErrorMessage } from "../../components/Popup/ErrorMessage";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +23,10 @@ export function CreateCarPage() {
 
     const [successMessage, setSuccessMessage] = useState("");
     const [success, setSuccess] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState(false);
+
     const [isMercosul, setIsMercosul] = useState(false);
 
     const navigate = useNavigate();
@@ -81,59 +86,63 @@ export function CreateCarPage() {
     ]
 
     const handleCreateCarClick = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        if (success === true) return;
-
-        if(!brands.includes(carBrand)) {
-            setCarBrandError(true);
-        }
-
-        if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
-            setModelNameError(!modelName);
-            setCarBrandError(!carBrand);
-            setLicensePlateError(!licensePlate);
-            setCarColorError(!carColor);
-            setCarOwnerError(!carOwner);
-        }
-        
-        if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return
-
-        try {
-            const response = await axios.post("http://localhost:3333/car", {
-                modelName,
-                carBrand,
-                licensePlate,
-                carColor,
-                carOwner,
-            });
-            
-            if (response.status === 201) {
-
-                setModelNameError(false);
-                setCarBrandError(false);
-                setLicensePlateError(false);
-                setCarBrandError(false);
-                setCarOwnerError(false);
-
-                setSuccessMessage("Carro adicionado com sucesso!");
-                setSuccess(true)
-
-                setTimeout(() => {
-                    setSuccessMessage(null);
-                    setSuccess(false)
-                    navigate('/carpage');
-                }, 3000);
-                
-            } else {
-                setSuccessMessage(null);
-                setSuccess(false)
-            }
-        } catch (error) {
-            setSuccessMessage(null);
-            setSuccess(false)
-        }
+    if (success === true) return;
+    
+    if (!brands.includes(carBrand)) {
+        setCarBrandError(true);
+        setError(true);
+        setErrorMessage("Informe uma marca existente!");
+    } else {
+        setCarBrandError(false);
     }
+
+    if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
+        setModelNameError(!modelName);
+        setCarBrandError(!carBrand);
+        setLicensePlateError(!licensePlate);
+        setCarColorError(!carColor);
+        setCarOwnerError(!carOwner);
+    }
+
+    if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return;
+
+    try {
+        const response = await axios.post("http://localhost:3333/car", {
+            modelName,
+            carBrand,
+            licensePlate,
+            carColor,
+            carOwner,
+        });
+
+        if (response.status === 201) {
+            setModelNameError(false);
+            setCarBrandError(false);
+            setLicensePlateError(false);
+            setCarBrandError(false);
+            setCarOwnerError(false);
+
+            setSuccessMessage("Carro adicionado com sucesso!");
+            setSuccess(true);
+
+            setTimeout(() => {
+                setSuccessMessage(null);
+                setSuccess(false);
+                navigate('/carpage');
+            }, 3000);
+
+        } else {
+            setSuccessMessage(null);
+            setSuccess(false);
+        }
+    } catch (error) {
+        setSuccessMessage(null);
+        setSuccess(false);
+    }
+}
+
 
     const handleInputChange = (id, value, setValue, setError) => {
         value = id === "idLicensePlate" ? value.toUpperCase() : value;
@@ -180,18 +189,19 @@ export function CreateCarPage() {
                         disable={success}
                     />                
                     <div className={styles.containerLicensePlate}>
-                        <FormInput
-                            className={styles.licensePlateInput}
-                            id="idLicensePlate"
-                            detail="Placa"
-                            placeholder="Digite a Placa do Carro"
-                            maxLength={7}
-                            value={licensePlate}
-                            onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
-                            showError={licensePlateError}
-                            disable={success}
-                            plateFormat={isMercosul}
-                        />
+                        <div className={styles.licensePlateInput}>
+                            <FormInput
+                                id="idLicensePlate"
+                                detail="Placa"
+                                placeholder="Digite a Placa do Carro"
+                                maxLength={7}
+                                value={licensePlate}
+                                onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
+                                showError={licensePlateError}
+                                disable={success}
+                                plateFormat={isMercosul}
+                            />
+                        </div>
                         <div className={styles.switchContainer}>
                             <p>Mercosul</p>
                             <SwitchIOS
@@ -230,6 +240,11 @@ export function CreateCarPage() {
             {success && (
                 <SuccessMessage 
                     message={successMessage}
+                />
+            )}
+            {error && (
+                <ErrorMessage
+                    message={errorMessage}
                 />
             )}
         </div>

@@ -1,0 +1,34 @@
+/* SuccessMessage.module.css */
+
+.errorMessage {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: rgb(255, 0, 0, 0.448);
+    border: 2px solid rgb(255, 0, 0);
+    color: var(--white);
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(255, 0, 0, 0.448);
+    animation: progressBarAnimation 3.0s linear;
+  }
+  
+  @keyframes progressBarAnimation {
+    to {
+      width: 0;
+    }
+  }
+  
