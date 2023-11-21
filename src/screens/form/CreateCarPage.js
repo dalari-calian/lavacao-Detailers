@@ -100,7 +100,7 @@ export function CreateCarPage() {
         if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return
 
         try {
-            const response = await axios.post("http://localhost:3333/client", {
+            const response = await axios.post("http://localhost:3333/car", {
                 modelName,
                 carBrand,
                 licensePlate,

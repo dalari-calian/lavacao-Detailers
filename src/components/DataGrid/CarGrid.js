@@ -6,32 +6,32 @@ import { DataGrid, ptBR } from '@mui/x-data-grid';
 export function CarGrid({ items }) {
   const columns = [
     { 
-      field: 'firstName',
-      headerName: 'Nome',
+      field: 'modelName',
+      headerName: 'Modelo',
       width: 250,
       headerClassName: style.headerStyle,
     },
     { 
-      field: 'lastName',
-      headerName: 'Sobrenome',
+      field: 'carBrand',
+      headerName: 'Marca',
       width: 250,
       headerClassName: style.headerStyle,
     },
     { 
-      field: 'cpf',
-      headerName: 'CPF',
+      field: 'licensePlate',
+      headerName: 'Placa',
       width: 230,
       headerClassName: style.headerStyle,
     },
     { 
-      field: 'email',
-      headerName: 'Email',
+      field: 'carColor',
+      headerName: 'Cor',
       width: 300,
       headerClassName: style.headerStyle,
     },
     { 
-      field: 'phone',
-      headerName: 'Celular',
+      field: 'carOwner',
+      headerName: 'Proprietário',
       width: 230,
       headerClassName: style.headerStyle,
     },
@@ -39,11 +39,11 @@ export function CarGrid({ items }) {
   
   const rows = items.map((car) => ({
     id: car.id,
-    firstName: car.firstName,
-    lastName: car.lastName,
-    cpf: car.cpf,
-    email: car.email,
-    phone: car.phone,
+    modelName: car.modelName,
+    carBrand: car.carBrand,
+    licensePlate: car.licensePlate,
+    carColor: car.carColor,
+    carOwner: car.carOwner,
   }));
   
   return (
