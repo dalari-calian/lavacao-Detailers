@@ -26,10 +26,68 @@ export function CreateCarPage() {
 
     const navigate = useNavigate();
 
+    const brands = [
+        "Aston Martin",
+        "Audi",
+        "Bentley",
+        "BMW",
+        "BMW Motorrad",
+        "BYD",
+        "Caoa Chery",
+        "Chevrolet",
+        "Chrysler",
+        "Citroën",
+        "Citroen",
+        "Dodge",
+        "Ferrari",
+        "Fiat",
+        "Ford",
+        "Great Wall",
+        "GWM",
+        "Honda",
+        "Husqvarna",
+        "Hyundai",
+        "JAC",
+        "Jaguar",
+        "Jeep",
+        "Kia",
+        "Lamborghini",
+        "Land Rover",
+        "Lexus",
+        "Lifan",
+        "Maserati",
+        "McLaren",
+        "Mercedes-Benz",
+        "Mercedes Benz",
+        "Mini",
+        "Mitsubishi",
+        "Nissan",
+        "Peugeot",
+        "Porsche",
+        "Ram",
+        "Renault",
+        "Rolls Royce",
+        "Royal Enfield",
+        "Seres",
+        "Smart",
+        "Subaru",
+        "Suzuki",
+        "Toyota",
+        "Triumph",
+        "Troller",
+        "Volkswagen",
+        "Volvo",
+        "Yamaha"
+    ]
+
     const handleCreateCarClick = async (e) => {
         e.preventDefault();
 
         if (success === true) return;
+
+        if(!brands.includes(carBrand)) {
+            setCarBrandError(true);
+        }
 
         if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
             setModelNameError(!modelName);
@@ -37,8 +95,9 @@ export function CreateCarPage() {
             setLicensePlateError(!licensePlate);
             setCarColorError(!carColor);
             setCarOwnerError(!carOwner);
-            return;
         }
+        
+        if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return
 
         try {
             const response = await axios.post("http://localhost:3333/client", {
@@ -119,21 +178,20 @@ export function CreateCarPage() {
                         onChange={(e) => handleInputChange("idCarBrand", e.target.value, setCarBrand, setCarBrandError)}
                         showError={carBrandError}
                         disable={success}
-                    />
+                    />                
                     <div className={styles.containerLicensePlate}>
-                        <div className={styles.licensePlateInput}>
-                            <FormInput
-                                id="idLicensePlate"
-                                detail="Placa"
-                                placeholder="Digite a Placa do Carro"
-                                maxLength={7}
-                                value={licensePlate}
-                                onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
-                                showError={licensePlateError}
-                                disable={success}
-                                plateFormat={isMercosul}
-                            />
-                        </div>
+                        <FormInput
+                            className={styles.licensePlateInput}
+                            id="idLicensePlate"
+                            detail="Placa"
+                            placeholder="Digite a Placa do Carro"
+                            maxLength={7}
+                            value={licensePlate}
+                            onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
+                            showError={licensePlateError}
+                            disable={success}
+                            plateFormat={isMercosul}
+                        />
                         <div className={styles.switchContainer}>
                             <p>Mercosul</p>
                             <SwitchIOS

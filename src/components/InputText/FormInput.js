@@ -8,17 +8,13 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
     const [mask,setMask] = useState("")
 
     const handleOnFocusInput = (id) => {
-        if (id === "idCpf") {
-            setMask("999.999.999-99");
-        } else if (id === "idPhone") {
-            setMask("99 99999-9999");
-        } else if (id === "idLicensePlate" && plateFormat === false) {
-            setMask("AAA-9999");
-        } else if (id === "idLicensePlate" && plateFormat === true) {
-            setMask("AAA9A99");
-        } else {
-            setMask("");
-        }
+        setMask(
+            id === "idCpf" ? "999.999.999-99" :
+            id === "idPhone" ? "99 99999-9999" :
+            (id === "idLicensePlate" && plateFormat === false) ? "AAA-9999" :
+            (id === "idLicensePlate" && plateFormat === true) ? "AAA9A99" :
+            ""
+        );
     }
 
     return (
