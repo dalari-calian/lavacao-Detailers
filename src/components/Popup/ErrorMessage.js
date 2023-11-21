@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import style from './ErrorMessage.module.css';
+import { ReactComponent as Close } from "../../assets/img/close-bold.svg";
 
 export function ErrorMessage({ message }) {
   const [showProgressBar, setShowProgressBar] = useState(true);
@@ -16,6 +17,7 @@ export function ErrorMessage({ message }) {
     <div className={style.errorMessage}>
       {showProgressBar && <ProgressBar />}
       <p>{message}</p>
+      <Close className={style.button} />
     </div>
   );
 }
