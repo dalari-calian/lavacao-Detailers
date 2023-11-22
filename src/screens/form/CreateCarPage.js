@@ -245,6 +245,7 @@ export function CreateCarPage() {
             {error && (
                 <ErrorMessage
                     message={errorMessage}
+                    onClick={(e) => setError(false)}
                 />
             )}
         </div>
