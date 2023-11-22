@@ -28,7 +28,7 @@ export function SwitchIOS({ checked, onChange }) {
             },
             },
             '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
+            color: '#ffb623',
             border: '6px solid #fff',
             },
             '&.Mui-disabled .MuiSwitch-thumb': {
@@ -53,7 +53,7 @@ export function SwitchIOS({ checked, onChange }) {
             transition: theme.transitions.create(['background-color'], {
             duration: 500,
             }),
-        },
+        }
       })}
     />
   );

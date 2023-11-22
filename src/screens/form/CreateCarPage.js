@@ -97,13 +97,23 @@ export function CreateCarPage() {
     } else {
         setCarBrandError(false);
     }
-
+    
     if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
         setModelNameError(!modelName);
         setCarBrandError(!carBrand);
         setLicensePlateError(!licensePlate);
         setCarColorError(!carColor);
         setCarOwnerError(!carOwner);
+    }
+
+    if (isMercosul && licensePlate.length !== 7) {
+        setLicensePlateError(true);
+        return
+    }
+
+    if (!isMercosul && licensePlate.length !== 8) {
+        setLicensePlateError(true);
+        return
     }
 
     if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return;
@@ -124,6 +134,8 @@ export function CreateCarPage() {
             setCarBrandError(false);
             setCarOwnerError(false);
 
+            setError(false);
+            setErrorMessage("");
             setSuccessMessage("Carro adicionado com sucesso!");
             setSuccess(true);
 
@@ -138,6 +150,12 @@ export function CreateCarPage() {
             setSuccess(false);
         }
     } catch (error) {
+        if (error.response.status === 409) {
+            setLicensePlateError(true);
+        }
+        
+        setError(true);
+        setErrorMessage(error.response.data.message);
         setSuccessMessage(null);
         setSuccess(false);
     }
@@ -194,7 +212,6 @@ export function CreateCarPage() {
                                 id="idLicensePlate"
                                 detail="Placa"
                                 placeholder="Digite a Placa do Carro"
-                                maxLength={7}
                                 value={licensePlate}
                                 onChange={(e) => handleInputChange("idLicensePlate", e.target.value, setLicensePlate, setLicensePlateError)}
                                 showError={licensePlateError}
