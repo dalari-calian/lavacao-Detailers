@@ -7,6 +7,7 @@ import { CarPage } from './screens/CarPage'
 import { ToolsPage } from './screens/ToolsPage'
 import { CreateClientPage } from './screens/form/CreateClientPage';
 import { CreateCarPage } from './screens/form/CreateCarPage';
+import { CreateServicePage } from './screens/form/CreateServicePage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/toolspage" element={<ToolsPage />} />
         <Route path="/createclient" element={<CreateClientPage />} />
         <Route path="/createcar" element={<CreateCarPage />} />
+        <Route path="/createservice" element={<CreateServicePage />} />
       </Routes>
     </BrowserRouter>
   );

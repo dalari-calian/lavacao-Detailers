@@ -11,11 +11,32 @@
     height: 6rem;
 }
 
-.containerSide {
+.containerContent {
     display: flex;
     flex-grow: 1;
+    flex-direction: row;
+}
+
+.containerSide {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 8rem;
     border-right: 2px solid var(--gray-300);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.containerGrid {
+    flex-grow: 1;
+    margin: 4rem 4rem;
+}
+
+.containerGrids {
+    display: flex;
+    flex-direction: row;
 }

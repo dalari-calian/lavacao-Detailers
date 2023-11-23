@@ -31,135 +31,76 @@ export function CreateCarPage() {
 
     const navigate = useNavigate();
 
-    const brands = [
-        "Aston Martin",
-        "Audi",
-        "Bentley",
-        "BMW",
-        "BMW Motorrad",
-        "BYD",
-        "Caoa Chery",
-        "Chevrolet",
-        "Chrysler",
-        "Citroën",
-        "Citroen",
-        "Dodge",
-        "Ferrari",
-        "Fiat",
-        "Ford",
-        "Great Wall",
-        "GWM",
-        "Honda",
-        "Husqvarna",
-        "Hyundai",
-        "JAC",
-        "Jaguar",
-        "Jeep",
-        "Kia",
-        "Lamborghini",
-        "Land Rover",
-        "Lexus",
-        "Lifan",
-        "Maserati",
-        "McLaren",
-        "Mercedes-Benz",
-        "Mercedes Benz",
-        "Mini",
-        "Mitsubishi",
-        "Nissan",
-        "Peugeot",
-        "Porsche",
-        "Ram",
-        "Renault",
-        "Rolls Royce",
-        "Royal Enfield",
-        "Seres",
-        "Smart",
-        "Subaru",
-        "Suzuki",
-        "Toyota",
-        "Triumph",
-        "Troller",
-        "Volkswagen",
-        "Volvo",
-        "Yamaha"
-    ]
-
     const handleCreateCarClick = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    if (success === true) return;
-    
-    if (!brands.includes(carBrand)) {
-        setCarBrandError(true);
-        setError(true);
-        setErrorMessage("Informe uma marca existente!");
-    } else {
-        setCarBrandError(false);
-    }
-    
-    if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
-        setModelNameError(!modelName);
-        setCarBrandError(!carBrand);
-        setLicensePlateError(!licensePlate);
-        setCarColorError(!carColor);
-        setCarOwnerError(!carOwner);
-    }
+        if (success === true) return;
 
-    if (isMercosul && licensePlate.length !== 7) {
-        setLicensePlateError(true);
-        return
-    }
+        const isBrandValid = await validateCarBrand(carBrand);
+        if (!isBrandValid) return;
+        
+        if (!modelName || !carBrand || !licensePlate || !carColor || !carOwner) {
+            setModelNameError(!modelName);
+            setCarBrandError(!carBrand);
+            setLicensePlateError(!licensePlate);
+            setCarColorError(!carColor);
+            setCarOwnerError(!carOwner);
+        }
 
-    if (!isMercosul && licensePlate.length !== 8) {
-        setLicensePlateError(true);
-        return
-    }
+        if (isMercosul && licensePlate.length !== 7) {
+            setLicensePlateError(true);
+            return
+        }
 
-    if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return;
+        if (!isMercosul && licensePlate.length !== 8) {
+            setLicensePlateError(true);
+            return
+        }
 
-    try {
-        const response = await axios.post("http://localhost:3333/car", {
-            modelName,
-            carBrand,
-            licensePlate,
-            carColor,
-            carOwner,
-        });
+        if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return;
 
-        if (response.status === 201) {
-            setModelNameError(false);
-            setCarBrandError(false);
-            setLicensePlateError(false);
-            setCarBrandError(false);
-            setCarOwnerError(false);
+        try {
+            const response = await axios.post("http://localhost:3333/car", {
+                modelName,
+                carBrand,
+                licensePlate,
+                carColor,
+                carOwner,
+            });
 
-            setError(false);
-            setErrorMessage("");
-            setSuccessMessage("Carro adicionado com sucesso!");
-            setSuccess(true);
+            if (response.status === 201) {
+                setModelNameError(false);
+                setCarBrandError(false);
+                setLicensePlateError(false);
+                setCarBrandError(false);
+                setCarOwnerError(false);
 
-            setTimeout(() => {
+                setError(false);
+                setErrorMessage("");
+                setSuccessMessage("Carro adicionado com sucesso!");
+                setSuccess(true);
+
+                setTimeout(() => {
+                    setSuccessMessage(null);
+                    setSuccess(false);
+                    navigate('/carpage');
+                }, 3000);
+
+            } else {
                 setSuccessMessage(null);
                 setSuccess(false);
-                navigate('/carpage');
-            }, 3000);
-
-        } else {
+            }
+        } catch (error) {
+            if (error.response.status === 409) {
+                setLicensePlateError(true);
+            }
+            
+            setError(true);
+            setErrorMessage(error.response.data.message);
             setSuccessMessage(null);
             setSuccess(false);
         }
-    } catch (error) {
-        if (error.response.status === 409) {
-            setLicensePlateError(true);
-        }
-        
-        setError(true);
-        setErrorMessage(error.response.data.message);
-        setSuccessMessage(null);
-        setSuccess(false);
     }
-}
 
 
     const handleInputChange = (id, value, setValue, setError) => {
@@ -175,12 +116,47 @@ export function CreateCarPage() {
         setLicensePlate("")
     };
     
+    const handleEnterKey = (e, nextInputId) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const nextInput = document.getElementById(nextInputId);
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    };
+
+    const handleEnterKeyLastInput = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleCreateCarClick(e);
+        }
+    }
+
     useEffect(() => {
         return () => {
             setSuccessMessage(null);
             setSuccess(false)
         };
     }, []);
+
+    const validateCarBrand = async (carBrand) => {
+        try {
+            const response = await axios.get(`http://localhost:3333/car/validate-brand?carBrand=${carBrand.toLowerCase()}`);
+
+            if (response.status === 200) {
+                setCarBrandError(false);
+                setError(false);
+                setErrorMessage("");    
+                return true
+            } 
+        } catch (error) {
+            setCarBrandError(true);
+            setError(true);
+            setErrorMessage(error.response.data.message);
+            return false
+        }
+    };
 
     return (
         <div className={ styles.containerPage }>
@@ -195,6 +171,7 @@ export function CreateCarPage() {
                         onChange={(e) => handleInputChange("idModel", e.target.value, setModelName, setModelNameError)}
                         showError={modelNameError}
                         disable={success}
+                        onKeyDown={(e) => handleEnterKey(e, "idCarBrand")}
                     />
                     <FormInput 
                         id="idCarBrand"
@@ -205,6 +182,7 @@ export function CreateCarPage() {
                         onChange={(e) => handleInputChange("idCarBrand", e.target.value, setCarBrand, setCarBrandError)}
                         showError={carBrandError}
                         disable={success}
+                        onKeyDown={(e) => handleEnterKey(e, "idLicensePlate")}
                     />                
                     <div className={styles.containerLicensePlate}>
                         <div className={styles.licensePlateInput}>
@@ -217,6 +195,7 @@ export function CreateCarPage() {
                                 showError={licensePlateError}
                                 disable={success}
                                 plateFormat={isMercosul}
+                                onKeyDown={(e) => handleEnterKey(e, "idCarColor")}
                             />
                         </div>
                         <div className={styles.switchContainer}>
@@ -236,6 +215,7 @@ export function CreateCarPage() {
                         onChange={(e) => handleInputChange("idCarColor", e.target.value, setCarColor, setCarColorError)}
                         showError={carColorError}
                         disable={success}
+                        onKeyDown={(e) => handleEnterKey(e, "idCarOwner")}
                     />
                     <FormInput 
                         id="idCarOwner"
@@ -246,8 +226,10 @@ export function CreateCarPage() {
                         onChange={(e) => handleInputChange("idCarOwner", e.target.value, setCarOwner, setCarOwnerError)}
                         showError={carOwnerError}
                         disable={success}
+                        onKeyDown={(e) => handleEnterKeyLastInput(e)}
                     />
                     <BtCreate
+                        id="idCreateButton"
                         label="Criar"
                         onClick={(e) => handleCreateCarClick(e)}
                         disable={success}

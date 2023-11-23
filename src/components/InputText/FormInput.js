@@ -3,7 +3,7 @@ import InputMask from 'react-input-mask';
 import styles from "./FormInput.module.css";
 import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 
-export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat }) {
+export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown }) {
 
     const [mask,setMask] = useState("")
 
@@ -36,6 +36,7 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
                 onChange={onChange}
                 onFocus={(e) => handleOnFocusInput(id)}
                 disabled={disable}
+                onKeyDown={onKeyDown}
             />
             {showError && <AlertIcon className={styles.alertIcon} />}
         </div>
