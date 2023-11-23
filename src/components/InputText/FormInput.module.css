@@ -45,5 +45,9 @@
     color: #ff0000;
 }
 
+.inputFormName[type="number"]::-webkit-inner-spin-button,
+.inputFormName[type="number"]::-webkit-outer-spin-button {
+    margin-right: 1.2rem; /* Ajuste a margem conforme necessário */
+}
 
 

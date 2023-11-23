@@ -28,13 +28,13 @@ export function ServiceGrid({ items }) {
   const rows = items.map((service) => ({
     id: service.id,
     name: service.name,
-    time: service.time,
-    price: service.price,
+    time: `${service.time} horas`,
+    price: `R$ ${service.price}`,
   }));
   
   return (
     <div className={style.gridContainer}>
-      <div style={{ height: 600, width: '85vw' }}>
+      <div style={{ height: 600, width: '43vw' }}>
         <DataGrid
           className={style.gridStyle}
           rows={rows}

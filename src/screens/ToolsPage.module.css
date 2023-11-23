@@ -32,11 +32,11 @@
 }
 
 .containerGrid {
+    display: flex;
     flex-grow: 1;
     margin: 4rem 4rem;
 }
 
 .containerGrids {
     display: flex;
-    flex-direction: row;
 }
