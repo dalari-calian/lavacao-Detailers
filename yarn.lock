@@ -10276,7 +10276,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@*", "prop-types@^15.5.10", "prop-types@^15.6.2", "prop-types@^15.8.1":
+"prop-types@*", "prop-types@^15.5.10", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -10391,6 +10391,11 @@
     "regenerator-runtime" "^0.13.9"
     "whatwg-fetch" "^3.6.2"
 
+"react-currency-input-field@^3.6.12":
+  "integrity" "sha512-92mVEo1u7tF8Lz5JeaEHpQY/p6ulmnfSk9r3dVMyykQNLoScvgQ7GczvV3uGDr81xkTF3czj7CTJ9Ekqq4+pIA=="
+  "resolved" "https://registry.npmjs.org/react-currency-input-field/-/react-currency-input-field-3.6.12.tgz"
+  "version" "3.6.12"
+
 "react-dev-utils@^12.0.1":
   "integrity" "sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
@@ -10429,7 +10434,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>= 16.8.0", "react-dom@>=0.14.0", "react-dom@>=16.13", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=18.0", "react-dom@>=18.0.0":
+"react-dom@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>= 16.8.0", "react-dom@>=0.14.0", "react-dom@>=16.13", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=18.0", "react-dom@>=18.0.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -10536,6 +10541,13 @@
     "whatwg-fetch" "^3.0.0"
     "ws" "^6.2.2"
     "yargs" "^17.6.2"
+
+"react-number-format@^5.3.1":
+  "integrity" "sha512-qpYcQLauIeEhCZUZY9jXZnnroOtdy3jYaS1zQ3M1Sr6r/KMOBEIGNIb7eKT19g2N1wbYgFgvDzs19hw5TrB8XQ=="
+  "resolved" "https://registry.npmjs.org/react-number-format/-/react-number-format-5.3.1.tgz"
+  "version" "5.3.1"
+  dependencies:
+    "prop-types" "^15.7.2"
 
 "react-reconciler@^0.27.0":
   "integrity" "sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA=="
@@ -10679,7 +10691,7 @@
     "react-dom" "^18.2.0"
     "resize-observer-polyfill" "^1.5.1"
 
-"react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0  || >=17.0.0 || >=18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0", "react@^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>=0.14", "react@>=0.14.0", "react@>=16.13", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=17.0", "react@>=18.0", "react@>=18.0.0", "react@18.2.0":
+"react@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0  || >=17.0.0 || >=18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0", "react@^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>= 16.8.0", "react@>=0.14", "react@>=0.14.0", "react@>=16.13", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=17.0", "react@>=18.0", "react@>=18.0.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

@@ -111,6 +111,13 @@ export function CreateServicePage() {
         e.preventDefault();
     }
 
+    const handleNumericFormatChange = (props, setValue, setError) => {
+        console.log(props.value);
+        setValue(props.value);
+
+        setError(false);
+    };
+
     return (
         <div className={ styles.containerPage }>
             <form className={ styles.containerForm }>
@@ -147,6 +154,7 @@ export function CreateServicePage() {
                         showError={priceError}
                         disable={success}
                         onKeyDown={(e) => handleEnterKeyLastInput(e)}
+                        onValueChange={(e) => handleNumericFormatChange(e, setPrice, setPriceError)}
                     />
                     <BtCreate
                         id="idCreateButton"

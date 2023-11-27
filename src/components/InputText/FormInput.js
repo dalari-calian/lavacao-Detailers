@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { NumericFormat } from 'react-number-format';
 import InputMask from 'react-input-mask';
 import styles from "./FormInput.module.css";
 import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 
-export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown }) {
+export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown, onValueChange }) {
 
     const [mask,setMask] = useState("")
     const [type,setType] = useState("text")
@@ -22,35 +23,49 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
         )
 
     }
-    
-    const handleOnChange = (e) => {
-        if (type === "number" && ((parseFloat(e.target.value) < 0) || (parseFloat(e.target.value) > 999.9))) {
-            return;
-        }
-        onChange(e);
-    }
 
     return (
         <div className={styles.inputContainer}>
             <p>{detail}</p>
-            <InputMask
-                type={type}
-                id={id}
-                mask={mask}
-                maskChar={null}
-                maxLength={maxLength}
-                formatChars={{
-                    'A': '[A-Za-z]',
-                    '9': '[0-9]',
-                }}
-                className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
-                placeholder={placeholder}
-                value={value}
-                onChange={handleOnChange}
-                onFocus={(e) => handleOnFocusInput(id)}
-                disabled={disable}
-                onKeyDown={onKeyDown}
-            />
+            {id === "idPrice" ? (
+                <NumericFormat
+                    value={value}
+                    thousandSeparator="."
+                    decimalSeparator=","
+                    prefix="R$ "
+                    decimalScale={2}
+                    onValueChange={onValueChange}
+                    onChange={onChange}
+                    className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
+                    placeholder={placeholder}
+                    onFocus={(e) => handleOnFocusInput(id)}
+                    onKeyDown={onKeyDown}
+                    disabled={disable}
+                    isAllowed={(values) => {
+                        const { floatValue } = values;
+                        return floatValue < 100000;
+                    }}
+                />
+            ) : (
+                <InputMask
+                    type={type}
+                    id={id}
+                    mask={mask}
+                    maskChar={null}
+                    maxLength={maxLength}
+                    formatChars={{
+                        'A': '[A-Za-z]',
+                        '9': '[0-9]',
+                    }}
+                    className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    onFocus={(e) => handleOnFocusInput(id)}
+                    disabled={disable}
+                    onKeyDown={onKeyDown}
+                />
+            )}
             {showError && <AlertIcon className={styles.alertIcon} />}
         </div>
     );
