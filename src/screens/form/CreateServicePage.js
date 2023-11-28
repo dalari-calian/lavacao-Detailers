@@ -46,9 +46,10 @@ export function CreateServicePage() {
         if (success === true) return;
 
         if (!name || !time || !price) {
-            setNameError(!name);
-            setTimeError(!time);
-            setPriceError(!price);
+            setNameError(true);
+            setTimeError(true);
+            setPriceError(true);
+            return
         }
 
         const numericTime = parseFloat(time);
@@ -63,8 +64,8 @@ export function CreateServicePage() {
         try {
             const response = await axios.post("http://localhost:3333/service", {
                 name,
-                time,
-                price,
+                time: parseFloat(time), // Converte para número
+                price: parseFloat(price), // Converte para número
             });
 
             if (response.status === 201) {
@@ -112,7 +113,6 @@ export function CreateServicePage() {
     }
 
     const handleNumericFormatChange = (props, setValue, setError) => {
-        console.log(props.value);
         setValue(props.value);
 
         setError(false);
@@ -125,7 +125,7 @@ export function CreateServicePage() {
                     <FormInput 
                         id="idService"
                         detail="Serviço"
-                        maxLength={15}
+                        maxLength={39}
                         placeholder="Digite o Nome do Serviço"
                         value={name}
                         onChange={(e) => handleInputChange(e.target.value, setName, setNameError)}
@@ -150,7 +150,6 @@ export function CreateServicePage() {
                         maxLength={15}
                         placeholder="Digite o Valor Cobrado"
                         value={price}
-                        onChange={(e) => handleInputChange(e.target.value, setPrice, setPriceError)}
                         showError={priceError}
                         disable={success}
                         onKeyDown={(e) => handleEnterKeyLastInput(e)}

@@ -7,7 +7,6 @@ import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown, onValueChange }) {
 
     const [mask,setMask] = useState("")
-    const [type,setType] = useState("text")
 
     const handleOnFocusInput = (id) => {
         setMask(
@@ -18,55 +17,79 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
             ""
         );
 
-        setType(
-            id === "idTime" ? "number" : "text"
-        )
-
     }
+
+    const renderInput = () => {
+        if (id === "idPrice") {
+            return (
+            <NumericFormat
+                value={value}
+                thousandSeparator="."
+                decimalSeparator=","
+                prefix="R$ "
+                decimalScale={2}
+                onValueChange={onValueChange}
+                onChange={onChange}
+                className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
+                placeholder={placeholder}
+                onFocus={(e) => handleOnFocusInput(id)}
+                onKeyDown={onKeyDown}
+                disabled={disable}
+                isAllowed={(values) => {
+                    const { floatValue } = values;
+                    return floatValue < 100000 && floatValue >= 0;
+                }}
+            />
+            );
+        } else if (id === "idTime") {
+            return (
+            <NumericFormat
+                value={value}
+                thousandSeparator="."
+                decimalSeparator=","
+                placeholder={placeholder}
+                onValueChange={onValueChange}
+                onChange={onChange}
+                className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
+                onFocus={(e) => handleOnFocusInput(id)}
+                onKeyDown={onKeyDown}
+                decimalScale={1}
+                disabled={disable}
+                isAllowed={(values) => {
+                    const { floatValue } = values;
+                    return floatValue < 1000 && floatValue >= 0;
+                }}
+            />
+            );
+        } else {
+            return (
+            <InputMask
+                type="text"
+                id={id}
+                mask={mask}
+                maskChar={null}
+                maxLength={maxLength}
+                formatChars={{
+                'A': '[A-Za-z]',
+                '9': '[0-9]',
+                }}
+                className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                onFocus={(e) => handleOnFocusInput(id)}
+                disabled={disable}
+                onKeyDown={onKeyDown}
+            />
+            );
+        }
+    };
 
     return (
         <div className={styles.inputContainer}>
-            <p>{detail}</p>
-            {id === "idPrice" ? (
-                <NumericFormat
-                    value={value}
-                    thousandSeparator="."
-                    decimalSeparator=","
-                    prefix="R$ "
-                    decimalScale={2}
-                    onValueChange={onValueChange}
-                    onChange={onChange}
-                    className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
-                    placeholder={placeholder}
-                    onFocus={(e) => handleOnFocusInput(id)}
-                    onKeyDown={onKeyDown}
-                    disabled={disable}
-                    isAllowed={(values) => {
-                        const { floatValue } = values;
-                        return floatValue < 100000;
-                    }}
-                />
-            ) : (
-                <InputMask
-                    type={type}
-                    id={id}
-                    mask={mask}
-                    maskChar={null}
-                    maxLength={maxLength}
-                    formatChars={{
-                        'A': '[A-Za-z]',
-                        '9': '[0-9]',
-                    }}
-                    className={`${styles.inputFormName} ${showError ? styles.error : ''}`}
-                    placeholder={placeholder}
-                    value={value}
-                    onChange={onChange}
-                    onFocus={(e) => handleOnFocusInput(id)}
-                    disabled={disable}
-                    onKeyDown={onKeyDown}
-                />
-            )}
-            {showError && <AlertIcon className={styles.alertIcon} />}
+          <p>{detail}</p>
+          {renderInput()}
+          {showError && <AlertIcon className={styles.alertIcon} />}
         </div>
-    );
+      );
 }
