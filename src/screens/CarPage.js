@@ -30,6 +30,18 @@ export function CarPage() {
     setCarData(updatedCarData);
   };
 
+  const handleEditClick = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3333/car/${id}`);
+      if (response.status === 200) {
+        
+        navigate("/createcar", { state: { carData: response.data } });
+      }
+    } catch (error) {
+      console.error('Erro ao buscar detalhes do carro para edição:', error);
+    }
+  };
+
   return (
     <div className={styles.containerPage}>
       <div className={styles.containerNav}>
@@ -49,6 +61,7 @@ export function CarPage() {
           <CarGrid 
             items={carData}
             onItemsChange={handleCarDataChange}
+            onEditClick={handleEditClick}
           />
         </div>
       </div>

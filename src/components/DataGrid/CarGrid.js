@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './CarGrid.module.css';
+import { DeleteConfirmation } from '../Modal/DeleteConfirmation';
 import { DataGrid, ptBR } from '@mui/x-data-grid';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,9 +19,12 @@ const useStyles = makeStyles((theme) => ({
   deleteIcon: {
     color: '#d44e4c',
   },
+  editIcon: {
+    color: '#dba539',
+  }
 }));
 
-export function CarGrid({ items, onItemsChange }) {
+export function CarGrid({ items, onItemsChange, onEditClick }) {
   const classes = useStyles();
 
   const handleDeleteClick = async (id) => {
@@ -35,12 +40,35 @@ export function CarGrid({ items, onItemsChange }) {
       console.error('Erro ao excluir o registro:', error);
     }
   };
+
+  const handleEditClick = (id) => {
+    onEditClick(id);
+  };
   
   const columns = [
     {
+      field: 'editAction',
+      headerName: '',
+      width: 62,
+      sortable: false,
+      headerClassName: style.headerStyle,
+      renderCell: (params) => (
+        <IconButton
+          aria-label="edit"
+          className={classes.margin}
+          onClick={() => handleEditClick(params.row.id)}
+        >
+          <EditIcon 
+            fontSize="small"
+            sx={{ color: '#dba539' }}
+          />
+        </IconButton>
+      ),
+    },
+    {
       field: 'deleteAction',
       headerName: '',
-      width: 120,
+      width: 100,
       sortable: false,
       headerClassName: style.headerStyle,
       renderCell: (params) => (
@@ -132,6 +160,7 @@ export function CarGrid({ items, onItemsChange }) {
           }}
         />
       </div>
+      <DeleteConfirmation/>
     </div>
   );
 }

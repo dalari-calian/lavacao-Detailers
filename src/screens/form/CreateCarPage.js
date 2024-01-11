@@ -7,8 +7,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { SwitchIOS } from "../../components/Check/SwitchIOS";
+import { useLocation } from "react-router-dom";
 
 export function CreateCarPage() {
+    const [id, setId] = useState("");
     const [modelName, setModelName] = useState("");
     const [carBrand, setCarBrand] = useState("");
     const [licensePlate, setLicensePlate] = useState("");
@@ -28,8 +30,10 @@ export function CreateCarPage() {
     const [error, setError] = useState(false);
 
     const [isMercosul, setIsMercosul] = useState(false);
+    const [isEditCar, setIsEditCar] = useState(false);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleCreateCarClick = async (e) => {
         e.preventDefault();
@@ -59,6 +63,51 @@ export function CreateCarPage() {
 
         if (modelNameError || carBrandError || licensePlateError || carColorError || carOwnerError) return;
 
+        if(isEditCar) {
+            try {
+                const response = await axios.put(`http://localhost:3333/car/${id}`, {
+                    modelName,
+                    carBrand,
+                    licensePlate,
+                    carColor,
+                    carOwner,
+                });
+    
+                if (response.status === 200) {
+                    setModelNameError(false);
+                    setCarBrandError(false);
+                    setLicensePlateError(false);
+                    setCarBrandError(false);
+                    setCarOwnerError(false);
+    
+                    setError(false);
+                    setErrorMessage("");
+                    setSuccessMessage("Carro atualizado com sucesso!");
+                    setSuccess(true);
+    
+                    setTimeout(() => {
+                        setSuccessMessage(null);
+                        setSuccess(false);
+                        navigate('/carpage');
+                    }, 3000);
+                } else {
+                    setSuccessMessage(null);
+                    setSuccess(false);
+                }
+            } catch (error) {
+                if (error.response.status === 409) {
+                    setLicensePlateError(true);
+                }
+    
+                setError(true);
+                setErrorMessage(error.response.data.message);
+                setSuccessMessage(null);
+                setSuccess(false);
+            }
+
+            return 
+        }
+        console.log("Passou isEditCar")
         try {
             const response = await axios.post("http://localhost:3333/car", {
                 modelName,
@@ -134,11 +183,24 @@ export function CreateCarPage() {
     }
 
     useEffect(() => {
+        if (location.state && location.state.carData) {
+            const { id, modelName, carBrand, licensePlate, carColor, carOwner } = location.state.carData;
+            setId(id);
+            setModelName(modelName);
+            setCarBrand(carBrand);
+            setLicensePlate(licensePlate);
+            setCarColor(carColor);
+            setCarOwner(carOwner);
+            setIsEditCar(true);
+
+            setIsMercosul(licensePlate.includes('-') ? false : true);
+        }
+
         return () => {
             setSuccessMessage(null);
             setSuccess(false)
         };
-    }, []);
+    }, [location.state]);
 
     const validateCarBrand = async (carBrand) => {
         try {
