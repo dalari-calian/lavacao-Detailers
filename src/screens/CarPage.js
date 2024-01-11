@@ -8,9 +8,7 @@ import { CarGrid } from "../components/DataGrid/CarGrid";
 import axios from 'axios';
 
 export function CarPage() {
-  
   const [carData, setCarData] = useState([]);
-  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +26,10 @@ export function CarPage() {
     fetchData();
   }, []);
 
+  const handleCarDataChange = (updatedCarData) => {
+    setCarData(updatedCarData);
+  };
+
   return (
     <div className={styles.containerPage}>
       <div className={styles.containerNav}>
@@ -44,7 +46,10 @@ export function CarPage() {
               onClick={() => navigate("/createcar")}
             />
           </div>
-          <CarGrid items={carData}/>
+          <CarGrid 
+            items={carData}
+            onItemsChange={handleCarDataChange}
+          />
         </div>
       </div>
     </div>
