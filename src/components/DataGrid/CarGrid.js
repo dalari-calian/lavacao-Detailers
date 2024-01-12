@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import style from './CarGrid.module.css';
 import { DeleteConfirmation } from '../Modal/DeleteConfirmation';
@@ -26,18 +26,35 @@ const useStyles = makeStyles((theme) => ({
 
 export function CarGrid({ items, onItemsChange, onEditClick }) {
   const classes = useStyles();
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(null);
 
   const handleDeleteClick = async (id) => {
-    try {
+    const carToDelete = items.find((item) => item.id === id);
+    setSelectedCar(carToDelete);
+    setShowDeleteConfirmation(true);
+  };
 
-      await axios.delete(`http://localhost:3333/car/${id}`);
+  const handleDeleteConfirmationClose = () => {
+    setShowDeleteConfirmation(false);
+  };
 
-      const updatedItems = items.filter((item) => item.id !== id);
-      onItemsChange(updatedItems);
+  const handleDeleteConfirmationDelete = async () => {
+    if (selectedCar) {
+      try {
+        await axios.delete(`http://localhost:3333/car/${selectedCar.id}`);
 
-      console.log(`Registro com ID ${id} excluído com sucesso!`);
-    } catch (error) {
-      console.error('Erro ao excluir o registro:', error);
+        const updatedItems = items.filter((item) => item.id !== selectedCar.id);
+        onItemsChange(updatedItems);
+
+        console.log(`Registro com ID ${selectedCar.id} excluído com sucesso!`);
+      } catch (error) {
+        console.error('Erro ao excluir o registro:', error);
+      } finally {
+        // Limpar o estado após a exclusão
+        setSelectedCar(null);
+        setShowDeleteConfirmation(false);
+      }
     }
   };
 
@@ -160,7 +177,13 @@ export function CarGrid({ items, onItemsChange, onEditClick }) {
           }}
         />
       </div>
-      <DeleteConfirmation/>
+      {showDeleteConfirmation && (
+        <DeleteConfirmation
+          selectedCar={selectedCar}
+          onClose={handleDeleteConfirmationClose}
+          onDelete={handleDeleteConfirmationDelete}
+        />
+      )}
     </div>
   );
 }
