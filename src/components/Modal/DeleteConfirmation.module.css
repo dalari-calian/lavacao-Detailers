@@ -13,6 +13,8 @@
   z-index: 99;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: white;
+  opacity: 0; /* Adiciona uma opacidade inicial para a animação de fade-in */
+  transition: opacity 0.5s ease-in-out;
 }
 
 .containerAlertIcon {
@@ -92,4 +94,12 @@
   color: black;
   margin-bottom: 1rem;
   font-size: large;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
 }

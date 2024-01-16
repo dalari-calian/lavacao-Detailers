@@ -8,11 +8,9 @@ import axios from 'axios';
 import { ServiceGrid } from '../components/DataGrid/ServiceGrid';
 
 export function ToolsPage() {
-  
+  const navigate = useNavigate();
   const [serviceData, setServiceData] = useState([]);
   
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,6 +25,22 @@ export function ToolsPage() {
 
     fetchData();
   }, []);
+
+  const handleServiceDataChange = (updatedServiceData) => {
+    setServiceData(updatedServiceData);
+  };
+
+  const handleEditClick = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3333/service/${id}`);
+      if (response.status === 200) {
+        
+        navigate("/createservice", { state: { serviceData: response.data } });
+      }
+    } catch (error) {
+      console.error('Erro ao buscar detalhes do carro para edição:', error);
+    }
+  };
 
   return (
     <div className={styles.containerPage}>
@@ -45,9 +59,17 @@ export function ToolsPage() {
                 onClick={() => navigate("/createservice")}
               />
             </div>
-            <ServiceGrid items={serviceData}/>
+            <ServiceGrid 
+              items={serviceData}
+              onItemsChange={handleServiceDataChange}
+              onEditClick={handleEditClick}
+            />
           </div>
-          <ServiceGrid items={serviceData}/>
+          <ServiceGrid 
+            items={serviceData}
+            onItemsChange={handleServiceDataChange}
+            onEditClick={handleEditClick}
+          />
           <div className={styles.containerGrids}>
           </div>
         </div>

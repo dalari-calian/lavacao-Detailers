@@ -1,13 +1,14 @@
 import styles from "./CreateServicePage.module.css"
 import { FormInput } from "../../components/InputText/FormInput";
 import { BtCreate } from "../../components/Buttons/BtCreate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { SuccessMessage } from "../../components/Popup/SuccessMessage";
 import { ErrorMessage } from "../../components/Popup/ErrorMessage";
 
 export function CreateServicePage() {
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [time, setTime] = useState("");
     const [price, setPrice] = useState("");
@@ -22,7 +23,10 @@ export function CreateServicePage() {
     const [errorMessage, setErrorMessage] = useState("");
     const [error, setError] = useState(false);
 
+    const [isEditService, setIsEditService] = useState(false);
+
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleInputChange = (value, setValue, setError) => {
         setValue(value);
@@ -61,11 +65,49 @@ export function CreateServicePage() {
 
         if (nameError || timeError || priceError) return;
 
+        if(isEditService) {
+            try {
+                const response = await axios.put(`http://localhost:3333/service/${id}`, {
+                    name,
+                    time: parseFloat(time),
+                    price: parseFloat(price),
+                });
+    
+                if (response.status === 200) {
+                    setNameError(false);
+                    setTimeError(false);
+                    setPriceError(false);
+    
+                    setError(false);
+                    setErrorMessage("");
+                    setSuccessMessage("Serviço atualizado com sucesso!");
+                    setSuccess(true);
+    
+                    setTimeout(() => {
+                        setSuccessMessage(null);
+                        setSuccess(false);
+                        navigate('/toolspage');
+                    }, 3000);
+                } else {
+                    setSuccessMessage(null);
+                    setSuccess(false);
+                }
+            } catch (error) {
+
+                setError(true);
+                setErrorMessage(error.response.data.message);
+                setSuccessMessage(null);
+                setSuccess(false);
+            }
+
+            return 
+        }
+
         try {
             const response = await axios.post("http://localhost:3333/service", {
                 name,
-                time: parseFloat(time), // Converte para número
-                price: parseFloat(price), // Converte para número
+                time: parseFloat(time),
+                price: parseFloat(price),
             });
 
             if (response.status === 201) {
@@ -117,6 +159,23 @@ export function CreateServicePage() {
 
         setError(false);
     };
+
+    useEffect(() => {
+        if (location.state && location.state.serviceData) {
+            const { id, name, time, price } = location.state.serviceData;
+            setId(id);
+            setName(name);
+            setTime(time);
+            setPrice(price);
+
+            setIsEditService(true);
+        }
+
+        return () => {
+            setSuccessMessage(null);
+            setSuccess(false)
+        };
+    }, [location.state]);
 
     return (
         <div className={ styles.containerPage }>

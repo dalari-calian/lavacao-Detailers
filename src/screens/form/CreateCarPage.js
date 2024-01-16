@@ -5,9 +5,8 @@ import { SuccessMessage } from "../../components/Popup/SuccessMessage";
 import { ErrorMessage } from "../../components/Popup/ErrorMessage";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { SwitchIOS } from "../../components/Check/SwitchIOS";
-import { useLocation } from "react-router-dom";
 
 export function CreateCarPage() {
     const [id, setId] = useState("");
@@ -107,7 +106,6 @@ export function CreateCarPage() {
 
             return 
         }
-        console.log("Passou isEditCar")
         try {
             const response = await axios.post("http://localhost:3333/car", {
                 modelName,

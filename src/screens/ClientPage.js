@@ -28,6 +28,22 @@ export function ClientPage() {
     fetchData();
   }, []);
 
+  const handleClientDataChange = (updatedClientData) => {
+    setClientData(updatedClientData);
+  };
+
+  const handleEditClick = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3333/client/${id}`);
+      if (response.status === 200) {
+        
+        navigate("/createclient", { state: { clientData: response.data } });
+      }
+    } catch (error) {
+      console.error('Erro ao buscar detalhes do carro para edição:', error);
+    }
+  };
+
   return (
     <div className={styles.containerPage}>
       <div className={styles.containerNav}>
@@ -44,7 +60,11 @@ export function ClientPage() {
               onClick={() => navigate("/createclient")}
             />
           </div>
-          <ClientGrid items={clientData} />
+          <ClientGrid
+            items={clientData}
+            onItemsChange={handleClientDataChange}
+            onEditClick={handleEditClick}
+          />
         </div>
       </div>
     </div>

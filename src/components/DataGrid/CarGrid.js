@@ -46,8 +46,6 @@ export function CarGrid({ items, onItemsChange, onEditClick }) {
 
         const updatedItems = items.filter((item) => item.id !== selectedCar.id);
         onItemsChange(updatedItems);
-
-        console.log(`Registro com ID ${selectedCar.id} excluído com sucesso!`);
       } catch (error) {
         console.error('Erro ao excluir o registro:', error);
       } finally {
@@ -179,7 +177,7 @@ export function CarGrid({ items, onItemsChange, onEditClick }) {
       </div>
       {showDeleteConfirmation && (
         <DeleteConfirmation
-          selectedCar={selectedCar}
+          selected={selectedCar}
           onClose={handleDeleteConfirmationClose}
           onDelete={handleDeleteConfirmationDelete}
         />

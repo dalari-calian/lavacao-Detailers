@@ -4,9 +4,11 @@ import { BtCreate } from "../../components/Buttons/BtCreate";
 import { SuccessMessage } from "../../components/Popup/SuccessMessage";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { ErrorMessage } from "../../components/Popup/ErrorMessage";
 
 export function CreateClientPage() {
+    const [id, setId] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [cpf, setCpf] = useState("");
@@ -22,7 +24,13 @@ export function CreateClientPage() {
     const [successMessage, setSuccessMessage] = useState(""); // Novo estado
     const [success, setSuccess] = useState(false); // Novo estado
 
+    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState(false);
+
+    const [isEditClient, setIsEditClient] = useState(false);
+
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleCreateClientClick = async (e) => {
         e.preventDefault();
@@ -36,6 +44,48 @@ export function CreateClientPage() {
             setEmailError(!email);
             setPhoneError(!phone);
             return;
+        }
+
+        if(isEditClient) {
+            try {
+                const response = await axios.put(`http://localhost:3333/client/${id}`, {
+                    firstName,
+                    lastName,
+                    cpf,
+                    email,
+                    phone,
+                });
+    
+                if (response.status === 200) {
+                    setFirstNameError(false);
+                    setLastNameError(false);
+                    setCpfError(false);
+                    setEmailError(false);
+                    setEmailError(false);
+    
+                    setError(false);
+                    setErrorMessage("");
+                    setSuccessMessage("Cliente atualizado com sucesso!");
+                    setSuccess(true);
+    
+                    setTimeout(() => {
+                        setSuccessMessage(null);
+                        setSuccess(false);
+                        navigate('/clientpage');
+                    }, 3000);
+                } else {
+                    setSuccessMessage(null);
+                    setSuccess(false);
+                }
+            } catch (error) {
+
+                setError(true);
+                setErrorMessage(error.response.data.message);
+                setSuccessMessage(null);
+                setSuccess(false);
+            }
+
+            return 
         }
 
         try {
@@ -81,11 +131,23 @@ export function CreateClientPage() {
     }
 
     useEffect(() => {
+        if (location.state && location.state.clientData) {
+            const { id, firstName, lastName, cpf, email, phone } = location.state.clientData;
+            setId(id);
+            setFirstName(firstName);
+            setLastName(lastName);
+            setCpf(cpf);
+            setEmail(email);
+            setPhone(phone);
+
+            setIsEditClient(true);
+        }
+
         return () => {
             setSuccessMessage(null);
             setSuccess(false)
         };
-    }, []);
+    }, [location.state]);
 
     return (
         <div className={ styles.containerPage }>
@@ -151,6 +213,12 @@ export function CreateClientPage() {
             {success && (
                 <SuccessMessage 
                     message={successMessage}
+                />
+            )}
+            {error && (
+                <ErrorMessage
+                    message={errorMessage}
+                    onClick={(e) => setError(false)}
                 />
             )}
         </div>
