@@ -9,20 +9,23 @@
 
 .containerForm {
     display: flex;
+    flex-direction: column;
     background-color: var(--white);
     height: 40rem;
     width: 50rem;
     border-radius: 25px;
     align-items: center;
+    padding: 2rem;
 }
 
 .containerInput {
     display: flex;
     flex-direction: column;
     padding: 0 12rem;
-    flex-grow: 1;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: blue;
+    flex-grow: 10;
 }
 
 .successMessage {
@@ -50,11 +53,6 @@
     }
 }
 
-.containerLicensePlate {
-    display: flex;
-    align-items: center;
-}
-
 .licensePlateInput {
     flex-grow: 10;
 }
@@ -65,3 +63,13 @@
     margin-bottom: 2.2rem;
 }
 
+.containerStepperBar {
+    display: flex;
+    align-items: center;
+    width: 40rem;
+    flex-grow: 1;
+}
+
+.containerButton {
+    flex-grow: 1;
+}
