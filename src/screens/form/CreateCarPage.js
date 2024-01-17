@@ -15,6 +15,7 @@ export function CreateCarPage() {
     const [licensePlate, setLicensePlate] = useState("");
     const [carColor, setCarColor] = useState("");
     const [carOwner, setCarOwner] = useState("");
+    const [carOwnersOptions, setCarOwnersOptions] = useState([]);
 
     const [modelNameError, setModelNameError] = useState(false);
     const [carBrandError, setCarBrandError] = useState(false);
@@ -33,6 +34,15 @@ export function CreateCarPage() {
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const fetchCarOwnersOptions = async () => {
+        try {
+            const response = await axios.get("http://localhost:3333/client");
+            setCarOwnersOptions(response.data);
+        } catch (error) {
+            console.error("Erro ao carregar opções de proprietários", error);
+        }
+    };
 
     const handleCreateCarClick = async (e) => {
         e.preventDefault();
@@ -200,6 +210,10 @@ export function CreateCarPage() {
         };
     }, [location.state]);
 
+    useEffect(() => {
+        fetchCarOwnersOptions();
+    }, []);
+
     const validateCarBrand = async (carBrand) => {
         try {
             const response = await axios.get(`http://localhost:3333/car/validate-brand?carBrand=${carBrand.toLowerCase()}`);
@@ -280,13 +294,14 @@ export function CreateCarPage() {
                     <FormInput 
                         id="idCarOwner"
                         detail="Proprietário"
-                        placeholder="Digite o Proprietário do Carro"
+                        placeholder="Selecione o Proprietário do Carro"
                         maxLength={13}
                         value={carOwner}
                         onChange={(e) => handleInputChange("idCarOwner", e.target.value, setCarOwner, setCarOwnerError)}
                         showError={carOwnerError}
                         disable={success}
                         onKeyDown={(e) => handleEnterKeyLastInput(e)}
+                        carOwnersOptions={carOwnersOptions}
                     />
                     <BtCreate
                         id="idCreateButton"
