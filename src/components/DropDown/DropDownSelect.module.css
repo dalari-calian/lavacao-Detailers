@@ -1,4 +1,4 @@
-.inputFormName {
+.dropDown {
     background-color: var(--gray-100);
     border: 1.5px solid transparent;
     position: relative;
@@ -10,43 +10,34 @@
     font-size: 1.1rem;
     outline: none;
     transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, opacity 0.5s ease; /* Adicionado 'opacity' à transição */
-    padding: 0 12px;
+    padding-left: 12px;
     margin-bottom: 25px;
     opacity: 1; /* Definido para 1 por padrão para garantir que seja visível inicialmente */
 }
 
-.inputFormName:focus {
+.dropDown:focus {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }
 
-.inputFormName:hover {
+.dropDown:hover {
     background-color: #f3a20049;
     border: 1.5px solid #f3a200c6;
 }
 
-.inputContainer {
-    position: relative;
+.option {
+    background-color: var(--gray-100);
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+
 }
 
-.error {
-    border: 1.5px solid #ff0000;
+.option:hover {
+    background-color: transparent;
+    color: black;
 }
 
-.error .inputFormName {
-    opacity: 0.8; /* Defina a opacidade desejada para o estado de erro */
+.option:checked {
+    background-color: #f3a20025;
+    color: #754e00;
 }
-
-.alertIcon {
-    position: absolute;
-    top: 48%;
-    right: 12px;
-    transform: translateY(-50%);
-    color: #ff0000;
-}
-
-.inputFormName[type="number"]::-webkit-inner-spin-button,
-.inputFormName[type="number"]::-webkit-outer-spin-button {
-    margin-right: 1.2rem; /* Ajuste a margem conforme necessário */
-}
-
