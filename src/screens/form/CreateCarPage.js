@@ -15,6 +15,7 @@ export function CreateCarPage() {
     const [licensePlate, setLicensePlate] = useState("");
     const [carColor, setCarColor] = useState("");
     const [carOwner, setCarOwner] = useState("");
+    const [idCarOwner, setIdCarOwner] = useState("");
     const [carOwnersOptions, setCarOwnersOptions] = useState([]);
 
     const [modelNameError, setModelNameError] = useState(false);
@@ -43,6 +44,16 @@ export function CreateCarPage() {
             console.error("Erro ao carregar opções de proprietários", error);
         }
     };
+    
+    const fetchCarOwner = async (idCarOwner) => {
+        try {
+            const response = await axios.get(`http://localhost:3333/client/${idCarOwner}`);
+            setCarOwner(response.data.firstName + " " + response.data.lastName);
+        } catch (error) {
+            console.error("Erro ao carregar opções de proprietários", error);
+        }
+    };
+
 
     const handleCreateCarClick = async (e) => {
         e.preventDefault();
@@ -60,6 +71,10 @@ export function CreateCarPage() {
             setCarOwnerError(!carOwner);
         }
 
+        if (carOwner === 0) {
+            setCarOwnerError(true);
+        }
+        
         if (isMercosul && licensePlate.length !== 7) {
             setLicensePlateError(true);
             return
@@ -80,6 +95,7 @@ export function CreateCarPage() {
                     licensePlate,
                     carColor,
                     carOwner,
+                    idCarOwner,
                 });
     
                 if (response.status === 200) {
@@ -123,6 +139,7 @@ export function CreateCarPage() {
                 licensePlate,
                 carColor,
                 carOwner,
+                idCarOwner,
             });
 
             if (response.status === 201) {
@@ -163,6 +180,13 @@ export function CreateCarPage() {
     const handleInputChange = (id, value, setValue, setError) => {
         value = id === "idLicensePlate" ? value.toUpperCase() : value;
         
+        if (id === "idCarOwner") {
+            fetchCarOwner(value)
+            setIdCarOwner(value)
+            setError(false);
+            return
+        }
+
         setValue(value);
 
         setError(false);
@@ -192,13 +216,14 @@ export function CreateCarPage() {
 
     useEffect(() => {
         if (location.state && location.state.carData) {
-            const { id, modelName, carBrand, licensePlate, carColor, carOwner } = location.state.carData;
+            const { id, modelName, carBrand, licensePlate, carColor, carOwner, idCarOwner } = location.state.carData;
             setId(id);
             setModelName(modelName);
             setCarBrand(carBrand);
             setLicensePlate(licensePlate);
             setCarColor(carColor);
             setCarOwner(carOwner);
+            setIdCarOwner(idCarOwner);
             setIsEditCar(true);
 
             setIsMercosul(licensePlate.includes('-') ? false : true);
@@ -297,11 +322,12 @@ export function CreateCarPage() {
                         placeholder="Selecione o Proprietário do Carro"
                         maxLength={13}
                         value={carOwner}
-                        onChange={(e) => handleInputChange("idCarOwner", e.target.value, setCarOwner, setCarOwnerError)}
+                        onChange={(value) => handleInputChange("idCarOwner", value, setCarOwner, setCarOwnerError)}
                         showError={carOwnerError}
                         disable={success}
                         onKeyDown={(e) => handleEnterKeyLastInput(e)}
                         carOwnersOptions={carOwnersOptions}
+                        idCarOwner={idCarOwner}
                     />
                     <BtCreate
                         id="idCreateButton"

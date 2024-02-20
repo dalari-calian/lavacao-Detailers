@@ -2,12 +2,17 @@
 import React from 'react';
 import { styled, Select, MenuItem } from '@mui/material';
 
-export function DropDownSelect({ options, onChange, value }) {
+export function DropDownSelect({ options, onChange, value, disabled }) {
+  
+  const placeholderOption = { id: 0, firstName: 'Selecione', lastName: 'um proprietário' };
+  const allOptions = [placeholderOption, ...options];
+  
   return (
     <div>
       <CustomSelect
         value={value}
         onChange={onChange}
+        disabled={disabled}
         sx={{ 
           outline: 0,
           boxShadow: 'none',
@@ -15,7 +20,7 @@ export function DropDownSelect({ options, onChange, value }) {
 
         }}
       >
-        {options.map((option) => (
+        {allOptions.map((option) => (
           <CustomMenuItem key={option.id} value={option.id}>
             {option.firstName} {option.lastName}
           </CustomMenuItem>

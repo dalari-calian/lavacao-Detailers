@@ -1,0 +1,49 @@
+.btBack{
+    border: none;
+    display: flex;
+    background-color: #F3A100;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    font-size: medium;
+    transition: background-color 0.3s, transform 0.5s ease-out;
+}
+
+.btBack:hover{
+    transform: scale(1.04);
+}
+
+.btBack:active{
+    transform: scale(0.95);
+}
+
+.btNext{
+    border: none;
+    display: flex;
+    background-color: #F3A100;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    font-size: medium;
+    transition: background-color 0.3s, transform 0.2s ease-out;
+}
+
+.btNext:hover{
+    transform: scale(1.04);
+}
+
+.btNext:active{
+    transform: scale(0.95);
+}
+
+.btBack.disabled{
+    background-color: #979797;
+}
+
+.btNext.disabled{
+    background-color: #979797;
+}

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 import InputMask from 'react-input-mask';
 import styles from "./FormInput.module.css";
 import { ReactComponent as AlertIcon } from "../../assets/icon/alertIcon.svg";
 import { DropDownSelect } from '../DropDown/DropDownSelect';
 
-export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown, onValueChange, carOwnersOptions }) {
+export function FormInput({ id, detail, placeholder, maxLength, value, onChange, showError, disable, plateFormat, onKeyDown, onValueChange, carOwnersOptions, idCarOwner }) {
 
     const [mask,setMask] = useState("")
     const [selectedOwner, setSelectedOwner] = useState(null)
+
+    useEffect(() => {
+        // Define o estado `selectedOwner` com base em `idCarOwner`
+        setSelectedOwner(idCarOwner !== "" ? idCarOwner : 0);
+    }, [idCarOwner]);
 
     const handleOnFocusInput = (id) => {
         setMask(
@@ -21,8 +26,9 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
     }
 
     const handleSelectChange = (event) => {
-      const carOwner = event.target.value
-      setSelectedOwner(carOwner)
+      const idCarOwner = event.target.value
+      setSelectedOwner(idCarOwner)
+      onChange(idCarOwner)
     };
 
     const renderInput = () => {
@@ -54,6 +60,7 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
               options={carOwnersOptions.result || []}
               onChange={handleSelectChange}
               value={selectedOwner}
+              disabled={disable}
             />
           )
         } else if (id === "idTime") {
@@ -106,5 +113,5 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
           {renderInput()}
           {showError && <AlertIcon className={styles.alertIcon} />}
         </div>
-      );
+    );
 }

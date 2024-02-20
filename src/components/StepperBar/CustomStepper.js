@@ -192,7 +192,7 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Serviços', 'Veículo', 'Prioridade'];
+const steps = ['Veículo', 'Serviços', 'Prioridade'];
 
 export default function CustomStepper({ activeStep }) {
   return (

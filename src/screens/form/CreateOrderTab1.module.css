@@ -1,0 +1,8 @@
+.containerOrder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: #CCCCCC;
+    border-radius: 30px;
+}

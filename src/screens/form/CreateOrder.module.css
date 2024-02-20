@@ -18,14 +18,11 @@
     padding: 2rem;
 }
 
-.containerInput {
+.containerStep {
     display: flex;
-    flex-direction: column;
-    padding: 0 12rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: blue;
     flex-grow: 10;
+    width: 75%;
+    margin-bottom: 2rem;
 }
 
 .successMessage {
@@ -71,5 +68,8 @@
 }
 
 .containerButton {
-    flex-grow: 1;
+    display: flex;
+    height: 2rem;
+    width: 100%;
+    justify-content: space-between;
 }

@@ -1,47 +1,55 @@
 import React, { useState } from "react";
-import styles from "./CreateOrder.module.css"
+import styles from "./CreateOrder.module.css";
 import CustomStepper from "../../components/StepperBar/CustomStepper";
-import { CreateClientPage } from "./CreateClientPage"
-import { CreateCarPage } from "./CreateCarPage"
+import { BtPageNavigate } from "../../components/Buttons/BtPageNavigate";
+import { CreateOrderTab1 } from "./CreateOrderTab1"
 
 export function CreateOrder() {
-    const [step, setStep] = useState(0)
+    const [step, setStep] = useState(0);
+    const [disableNextStep, setDisableNextStep] = useState(false);
+    const [disableBackStep, setDisableBackStep] = useState(true);
     
     const handleNextClick = () => {
-        setStep((prevStep) => (prevStep < 2 ? prevStep + 1 : prevStep));
-        //setStep(step<3 ? step+1 : step)
+        const nextStep = step + 1;
+        setStep(nextStep <= 3 ? nextStep : step);
+        setDisableBackStep(false);
+        setDisableNextStep(nextStep >= 3);
     }
 
     const handleBackClick = () => {
-        setStep((prevStep) => (prevStep > 0 ? prevStep - 1 : prevStep));
-        //setStep(step>0 ? step-1 : step)
+        const prevStep = step - 1;
+        setStep(prevStep >= 0 ? prevStep : step);
+        setDisableNextStep(false);
+        setDisableBackStep(prevStep <= 0);
     }
 
     const renderStepComponent = () => {
         switch (step) {
-          case 1:
-            return <CreateClientPage />;
-          case 2:
-            return <CreateCarPage />;
-          default:
-            return null;
+            case 0:
+                return <CreateOrderTab1/>;
+            case 1:
+                return <div>1</div>;
+            case 2:
+                return <div>2</div>;
+            case 3:
+                return <div>3</div>;
+            default:
+                return null;
         }
     };
 
     return (
-        <div className={ styles.containerPage }>
-            <form className={ styles.containerForm }>
-                <div className={ styles.containerStepperBar }>
+        <div className={styles.containerPage}>
+            <form className={styles.containerForm}>
+                <div className={styles.containerStepperBar}>
                     <CustomStepper activeStep={step}/>
                 </div>
-                <div className={ styles.containerInput }>
-                    {
-                        renderStepComponent()
-                    }
+                <div className={styles.containerStep}>
+                    {renderStepComponent()}
                 </div>
-                <div className={ styles.containerButton }>
-                    <button type="button" onClick={handleNextClick}>Próximo</button>
-                    <button type="button" onClick={handleBackClick}>Volta</button>
+                <div className={styles.containerButton}>
+                    <BtPageNavigate onClick={handleBackClick} label="Voltar" stepType={0} disable={disableBackStep}/>
+                    <BtPageNavigate onClick={handleNextClick} label="Próximo" stepType={1} disable={disableNextStep}/>
                 </div>
             </form>
         </div>
