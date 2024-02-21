@@ -39,7 +39,21 @@ export function ClientGrid({ items, onItemsChange, onEditClick }) {
     setShowDeleteConfirmation(false);
   };
 
+  const handleValidadeDelete = async () => {
+    try {
+      const resp = await axios.get(`http://localhost:3333/car/by-client/${selectedClient.id}`);
+      console.log(resp.data.message)
+    } catch (error) {
+      console.error('Erro ao excluir o cliente:', error);
+    }
+  }
+
   const handleDeleteConfirmationDelete = async () => {
+    
+    handleValidadeDelete()
+    
+    return
+
     if (selectedClient) {
       try {
         await axios.delete(`http://localhost:3333/client/${selectedClient.id}`);
@@ -47,7 +61,7 @@ export function ClientGrid({ items, onItemsChange, onEditClick }) {
         const updatedItems = items.filter((item) => item.id !== selectedClient.id);
         onItemsChange(updatedItems);
       } catch (error) {
-        console.error('Erro ao excluir o registro:', error);
+        console.error('Erro ao excluir o cliente:', error);
       } finally {
 
         setSelectedClient(null);
