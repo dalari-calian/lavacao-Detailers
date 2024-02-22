@@ -3,10 +3,11 @@ import { ReactComponent as AlertDeleteIcon } from "../../assets/icon/alertDelete
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-export function DeleteConfirmation({ selected, onClose, onDelete, disabled, errorMessage }) {
+export function DeleteConfirmation({ selected, onClose, onDelete, disabled, errorMessage, titleError }) {
     const [isVisible, setIsVisible] = useState(false);
 
     const defaultMessage = "Esta ação não pode ser desfeita. Todos os\nvalores associados com este veículos serão\nperdidos."
+    const defaultTittle = "Você tem certeza?"
 
     useEffect(() => {
         setIsVisible(true);
@@ -28,10 +29,10 @@ export function DeleteConfirmation({ selected, onClose, onDelete, disabled, erro
                 />
             </div>
             <p className={style.questionText}>
-                Você tem certeza?
+                {titleError ? titleError : defaultTittle}
             </p>
             <p className={style.alertMessage}>
-                {errorMessage}
+                {errorMessage ? errorMessage : defaultMessage}
             </p>
             <p className={style.carDetails}>
                 {selected.modelName ? `Veículo: ${selected.modelName} | Placa: ${selected.licensePlate}` : ''}

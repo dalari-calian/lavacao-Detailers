@@ -28,10 +28,14 @@ export function ClientGrid({ items, onItemsChange, onEditClick }) {
   const classes = useStyles();
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [disableDelete, setDisableDelete] = useState(false);
+  const [errorTitle, setErrorTitle] = useState(null);
   
   const handleDeleteClick = async (id) => {
     const clientToDelete = items.find((item) => item.id === id);
     setSelectedClient(clientToDelete);
+    await handleValidadeDelete(clientToDelete)
     setShowDeleteConfirmation(true);
   };
 
@@ -39,20 +43,24 @@ export function ClientGrid({ items, onItemsChange, onEditClick }) {
     setShowDeleteConfirmation(false);
   };
 
-  const handleValidadeDelete = async () => {
+  const handleValidadeDelete = async (clientToDelete) => {
     try {
-      const resp = await axios.get(`http://localhost:3333/car/by-client/${selectedClient.id}`);
-      console.log(resp.data.message)
+      const response = await axios.get(`http://localhost:3333/car/by-client/${clientToDelete.id}`);
+      if (response.status === 200) {
+        // No cars associated, proceed with deletion
+        setErrorMessage(null);
+        setErrorTitle(null);
+        setDisableDelete(false);
+        return;
+      }
     } catch (error) {
-      console.error('Erro ao excluir o cliente:', error);
+      setErrorMessage(error.response.data.message + "\nPrimeiro exclua os veículos.");
+      setErrorTitle("Não será possível excluir o cliente!");
+      setDisableDelete(true);
     }
   }
 
   const handleDeleteConfirmationDelete = async () => {
-    
-    handleValidadeDelete()
-    
-    return
 
     if (selectedClient) {
       try {
@@ -193,6 +201,9 @@ export function ClientGrid({ items, onItemsChange, onEditClick }) {
           selected={selectedClient}
           onClose={handleDeleteConfirmationClose}
           onDelete={handleDeleteConfirmationDelete}
+          errorMessage={errorMessage}
+          disabled={disableDelete}
+          titleError={errorTitle}
         />
       )}
     </div>
