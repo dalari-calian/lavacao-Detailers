@@ -28,11 +28,11 @@ export function CreateOrder() {
             case 0:
                 return <CreateOrderTab1/>;
             case 1:
-                return <div>1</div>;
-            case 2:
                 return <div>2</div>;
-            case 3:
+            case 2:
                 return <div>3</div>;
+            case 3:
+                return <div>4</div>;
             default:
                 return null;
         }
