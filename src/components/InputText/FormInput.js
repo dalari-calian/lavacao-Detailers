@@ -56,11 +56,12 @@ export function FormInput({ id, detail, placeholder, maxLength, value, onChange,
         } else if (id === "idCarOwner")  {
           return (
             <DropDownSelect
-              placeholder={placeholder}
-              options={carOwnersOptions.result || []}
-              onChange={handleSelectChange}
-              value={selectedOwner}
-              disabled={disable}
+                id='carOwner'
+                placeholder={placeholder}
+                options={carOwnersOptions.result || []}
+                onChange={handleSelectChange}
+                value={selectedOwner}
+                disabled={disable}
             />
           )
         } else if (id === "idTime") {

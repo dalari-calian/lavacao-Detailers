@@ -1,8 +1,18 @@
-.containerOrder{
+.containerContent{
+    background-color: #CCCCCC;
+    flex-grow: 1;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.containerInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     flex-grow: 1;
-    background-color: #CCCCCC;
-    border-radius: 30px;
+    width: 60%;
 }

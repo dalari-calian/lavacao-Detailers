@@ -1,3 +1,8 @@
 .inputContainer {
     position: relative;
+    width: 100%;
+}
+
+.containerValue {
+    background-color: #A6A6A6;
 }
